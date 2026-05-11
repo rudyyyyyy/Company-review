@@ -1,0 +1,738 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>J&F · Monthly Performance Review</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  /* ============ PALETTE — 3 COLORS ONLY ============
+     1. Ink (near-black)     #1a1a2e
+     2. Accent gradient      #8B5CF6 → #3B82F6  (from logo)
+     3. Paper (off-white)    #f6f5f1
+  ===================================================== */
+  :root{
+    --paper:#f6f5f1;
+    --paper-2:#efede6;
+    --line:rgba(26,26,46,0.08);
+    --line-2:rgba(26,26,46,0.15);
+    --ink:#1a1a2e;
+    --ink-2:#4a4a6a;
+    --ink-3:#8a8aa3;
+    --accent-a:#8B5CF6;
+    --accent-b:#3B82F6;
+    --accent-soft:rgba(99,102,241,0.10);
+    --radius:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{height:100%}
+  body{
+    font-family:'Inter Tight',-apple-system,sans-serif;
+    background:var(--paper);
+    color:var(--ink);
+    min-height:100vh;
+    -webkit-font-smoothing:antialiased;
+    letter-spacing:-0.005em;
+    overflow-x:hidden;
+  }
+  body::before{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background:
+      radial-gradient(900px 600px at 90% -10%, rgba(139,92,246,0.06), transparent 60%),
+      radial-gradient(700px 500px at -5% 100%, rgba(59,130,246,0.05), transparent 60%);
+  }
+  body::after{
+    content:'';position:fixed;inset:0;pointer-events:none;z-index:0;
+    background-image:
+      linear-gradient(var(--line) 1px,transparent 1px),
+      linear-gradient(90deg,var(--line) 1px,transparent 1px);
+    background-size:48px 48px;
+    mask-image:radial-gradient(ellipse at 50% 40%, black 20%, transparent 75%);
+    opacity:0.5;
+  }
+
+  .shell{max-width:1280px;margin:0 auto;padding:32px 32px 80px;position:relative;z-index:1}
+
+  /* TOP BAR */
+  .topbar{
+    display:flex;justify-content:space-between;align-items:center;
+    padding:12px 18px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:rgba(255,255,255,0.6);
+    backdrop-filter:blur(20px);
+    margin-bottom:32px;
+    font-size:12px;
+  }
+  .topbar-left{display:flex;align-items:center;gap:16px}
+  .logo-img{
+    height:42px;width:auto;
+    display:block;
+  }
+  .topbar-divider{width:1px;height:28px;background:var(--line-2)}
+  .topbar-meta{display:flex;flex-direction:column;line-height:1.2}
+  .topbar-meta small{color:var(--ink-3);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;font-weight:500}
+  .topbar-meta strong{font-weight:500;font-size:13px;margin-top:2px;color:var(--ink)}
+  .topbar-right{display:flex;align-items:center;gap:20px;color:var(--ink-2);font-family:'JetBrains Mono',monospace;font-size:11px}
+  .topbar-right span{display:flex;align-items:center;gap:6px}
+  .dot{
+    width:7px;height:7px;border-radius:50%;
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    box-shadow:0 0 8px rgba(139,92,246,0.5);
+  }
+
+  /* HERO */
+  .hero{
+    display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;
+    padding-bottom:32px;margin-bottom:32px;
+    border-bottom:1px solid var(--line);
+  }
+  @media (max-width:780px){.hero{grid-template-columns:1fr}}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:10px;
+    font-size:11px;letter-spacing:0.22em;text-transform:uppercase;
+    background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    font-weight:600;margin-bottom:18px;
+  }
+  .eyebrow::before{
+    content:'';width:24px;height:1px;
+    background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
+  }
+  h1{
+    font-family:'Fraunces',serif;font-weight:300;
+    font-size:clamp(40px,5vw,64px);
+    line-height:1;letter-spacing:-0.02em;
+    margin-bottom:16px;
+    color:var(--ink);
+  }
+  h1 em{
+    font-style:italic;font-weight:400;
+    background:linear-gradient(135deg,var(--accent-a) 0%,var(--accent-b) 100%);
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .hero-sub{color:var(--ink-2);font-size:14.5px;line-height:1.5;max-width:560px}
+  .hero-sub b{color:var(--ink);font-weight:600}
+
+  .hero-stats{
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    padding:20px 24px;
+    background:rgba(255,255,255,0.6);
+    backdrop-filter:blur(20px);
+    min-width:280px;
+  }
+  .hero-stats-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
+  .hero-stats-row:last-child{margin-bottom:0}
+  .hero-stats-label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
+  .hero-stats-val{font-family:'Fraunces',serif;font-size:24px;font-weight:400;color:var(--ink)}
+  .hero-stats-val .small{font-size:14px;color:var(--ink-3);margin-left:6px}
+  .stat-bar{height:3px;background:var(--paper-2);border-radius:99px;overflow:hidden;margin-top:14px}
+  .stat-bar-fill{
+    height:100%;width:0%;
+    background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
+    transition:width 0.6s cubic-bezier(0.65,0,0.35,1);
+    border-radius:99px;
+    box-shadow:0 0 12px rgba(139,92,246,0.3);
+  }
+
+  /* FILTER STRIP */
+  .filter-strip{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+  .chip{
+    padding:8px 14px;border-radius:99px;border:1px solid var(--line-2);
+    font-size:12px;color:var(--ink-2);cursor:pointer;
+    background:rgba(255,255,255,0.5);transition:0.2s;
+    font-family:inherit;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .chip:hover{border-color:var(--accent-a);color:var(--ink)}
+  .chip.active{
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    color:#fff;border-color:transparent;font-weight:500;
+    box-shadow:0 4px 12px -4px rgba(99,102,241,0.4);
+  }
+  .chip-count{
+    font-family:'JetBrains Mono',monospace;font-size:10px;
+    padding:1px 6px;border-radius:99px;
+    background:rgba(26,26,46,0.06);
+  }
+  .chip.active .chip-count{background:rgba(255,255,255,0.25);color:#fff}
+
+  /* DASHBOARD GRID */
+  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+  .card{
+    grid-column:span 6;
+    border:1px solid var(--line);
+    border-radius:var(--radius);
+    background:rgba(255,255,255,0.7);
+    backdrop-filter:blur(20px);
+    overflow:hidden;
+    transition:0.3s cubic-bezier(0.16,1,0.3,1);
+    position:relative;
+  }
+  .card:hover{
+    border-color:var(--line-2);
+    transform:translateY(-2px);
+    box-shadow:0 20px 40px -20px rgba(26,26,46,0.12);
+  }
+  .card.expanded{
+    grid-column:span 12;
+    border-color:transparent;
+    background:#fff;
+    box-shadow:
+      0 0 0 1px rgba(139,92,246,0.25),
+      0 30px 60px -20px rgba(99,102,241,0.18);
+  }
+  .card[data-id="A"]{grid-column:span 4}
+  .card[data-id="H"]{grid-column:span 4}
+  .card[data-id="A"].expanded{grid-column:span 12}
+  .card[data-id="H"].expanded{grid-column:span 12}
+  @media (max-width:980px){
+    .card,.card[data-id="A"],.card[data-id="H"]{grid-column:span 12}
+  }
+
+  .card-head{
+    padding:22px 24px;cursor:pointer;
+    display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;
+    user-select:none;
+  }
+  .card-tag{
+    width:44px;height:44px;border-radius:10px;
+    border:1px solid var(--line-2);
+    display:grid;place-items:center;
+    font-family:'Fraunces',serif;font-style:italic;font-size:22px;font-weight:400;
+    background:rgba(255,255,255,0.7);
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    transition:0.3s;
+  }
+  .card.expanded .card-tag{
+    -webkit-text-fill-color:#fff;color:#fff;
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    -webkit-background-clip:initial;background-clip:initial;
+    border-color:transparent;font-style:normal;font-weight:500;
+    box-shadow:0 6px 16px -4px rgba(99,102,241,0.4);
+  }
+  .card-title-block{min-width:0}
+  .card-title{
+    font-family:'Fraunces',serif;font-weight:500;font-size:19px;
+    letter-spacing:-0.01em;line-height:1.2;color:var(--ink);
+    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+  }
+  .weight-pill{
+    font-family:'JetBrains Mono',monospace;
+    font-size:10px;letter-spacing:0.08em;font-weight:500;
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    border:1px solid var(--accent-a);
+    padding:2px 7px;border-radius:99px;
+  }
+  .card-sub{font-size:12.5px;color:var(--ink-3);margin-top:4px;line-height:1.4}
+  .card-progress{
+    display:flex;align-items:center;gap:12px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-3);
+  }
+  .mini-bar{width:48px;height:3px;background:var(--paper-2);border-radius:99px;overflow:hidden}
+  .mini-bar-fill{
+    height:100%;width:0%;
+    background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
+    transition:0.4s;border-radius:99px;
+  }
+  .chevron{width:24px;height:24px;display:grid;place-items:center;color:var(--ink-3);transition:0.3s}
+  .card.expanded .chevron{transform:rotate(180deg);color:var(--accent-a)}
+
+  .card-body{max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(0.16,1,0.3,1)}
+  .card.expanded .card-body{max-height:2000px}
+  .card-body-inner{padding:0 24px 24px;border-top:1px solid var(--line);padding-top:22px}
+  .note{
+    font-size:12.5px;color:var(--ink-2);line-height:1.55;
+    padding:12px 14px;
+    background:linear-gradient(90deg,rgba(139,92,246,0.06),rgba(59,130,246,0.04));
+    border-left:2px solid var(--accent-a);
+    border-radius:0 6px 6px 0;
+    margin-bottom:22px;
+  }
+  .note b{color:var(--ink);font-weight:600}
+
+  .fields{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .fields .full{grid-column:1 / -1}
+  @media (max-width:640px){.fields{grid-template-columns:1fr}}
+  .field-label{display:block;font-size:13px;font-weight:500;color:var(--ink);margin-bottom:5px;line-height:1.4}
+  .field-desc{font-size:11.5px;color:var(--ink-3);line-height:1.5;margin-bottom:9px}
+  .input,.select,.textarea{
+    width:100%;
+    background:rgba(255,255,255,0.9);
+    border:1px solid var(--line-2);
+    border-radius:8px;
+    padding:11px 13px;
+    color:var(--ink);font-family:inherit;font-size:13.5px;
+    transition:0.2s;outline:none;
+  }
+  .textarea{min-height:80px;resize:vertical;line-height:1.55}
+  .input:focus,.select:focus,.textarea:focus{
+    border-color:var(--accent-a);background:#fff;
+    box-shadow:0 0 0 3px rgba(139,92,246,0.12);
+  }
+  .input::placeholder,.textarea::placeholder{color:var(--ink-3)}
+  .select{
+    appearance:none;-webkit-appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%238B5CF6' d='M6 8L0 0h12z'/></svg>");
+    background-repeat:no-repeat;background-position:right 14px center;
+    padding-right:36px;cursor:pointer;
+  }
+  .select option{background:#fff;color:var(--ink)}
+
+  .rating-row{
+    display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;
+    padding:14px 0;border-bottom:1px solid var(--line);
+  }
+  .rating-row:last-child{border-bottom:none}
+  .rating-info{min-width:0}
+  .rating-q{font-size:13.5px;font-weight:500;color:var(--ink);margin-bottom:3px}
+  .rating-d{font-size:11.5px;color:var(--ink-3);line-height:1.4}
+  .rating-pills{display:flex;gap:6px}
+  .rating-pill{
+    width:36px;height:36px;border-radius:8px;
+    border:1px solid var(--line-2);background:rgba(255,255,255,0.6);
+    color:var(--ink-2);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;
+    cursor:pointer;transition:0.2s;display:grid;place-items:center;
+  }
+  .rating-pill:hover{border-color:var(--accent-a);color:var(--ink)}
+  .rating-pill.selected{
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    color:#fff;border-color:transparent;
+    box-shadow:0 4px 10px -3px rgba(99,102,241,0.45);
+  }
+
+  .actions{
+    margin-top:36px;
+    display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
+    padding:16px 22px;
+    border:1px solid var(--line);
+    border-radius:12px;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(20px);
+    position:sticky;bottom:16px;z-index:20;
+    box-shadow:0 10px 30px -10px rgba(26,26,46,0.08);
+  }
+  .actions-info{display:flex;align-items:center;gap:18px;font-size:12.5px;color:var(--ink-2);flex-wrap:wrap}
+  .actions-info b{color:var(--ink);font-weight:600;font-family:'JetBrains Mono',monospace}
+  .actions-btns{display:flex;gap:10px}
+  .btn{
+    font-family:inherit;font-size:13.5px;font-weight:500;
+    padding:11px 22px;border-radius:8px;border:1px solid transparent;
+    cursor:pointer;transition:0.25s;
+    display:inline-flex;align-items:center;gap:8px;
+  }
+  .btn-primary{
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    color:#fff;
+    box-shadow:0 6px 18px -6px rgba(99,102,241,0.5);
+  }
+  .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 24px -6px rgba(99,102,241,0.6)}
+  .btn-ghost{background:transparent;color:var(--ink-2);border-color:var(--line-2)}
+  .btn-ghost:hover{color:var(--ink);border-color:var(--accent-a)}
+
+  .thanks-overlay{
+    position:fixed;inset:0;z-index:100;
+    background:rgba(246,245,241,0.85);backdrop-filter:blur(20px);
+    display:none;place-items:center;
+    animation:fadeIn 0.4s ease;
+    padding:24px;
+  }
+  .thanks-overlay.show{display:grid}
+  @keyframes fadeIn{from{opacity:0}to{opacity:1}}
+  .thanks-card{
+    text-align:center;max-width:480px;padding:48px 40px;
+    border:1px solid var(--line-2);border-radius:18px;
+    background:#fff;
+    box-shadow:0 30px 80px -20px rgba(99,102,241,0.25);
+    animation:popIn 0.5s cubic-bezier(0.16,1,0.3,1);
+  }
+  @keyframes popIn{from{opacity:0;transform:translateY(20px) scale(0.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+  .thanks-mark{
+    width:64px;height:64px;border-radius:50%;margin:0 auto 24px;
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    display:grid;place-items:center;
+    box-shadow:0 0 50px rgba(139,92,246,0.4);
+  }
+  .thanks-mark svg{width:28px;height:28px;color:#fff}
+  .thanks-card h2{font-family:'Fraunces',serif;font-weight:400;font-size:34px;letter-spacing:-0.02em;margin-bottom:12px;color:var(--ink)}
+  .thanks-card h2 em{
+    font-style:italic;
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+  }
+  .thanks-card p{color:var(--ink-2);font-size:14px;line-height:1.6;margin-bottom:24px}
+  .thanks-ref{
+    display:inline-flex;gap:18px;flex-wrap:wrap;justify-content:center;
+    padding:10px 18px;border:1px solid var(--line-2);border-radius:99px;
+    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-3);letter-spacing:0.06em;
+  }
+  .thanks-ref b{color:var(--ink);font-weight:600}
+  .thanks-status{
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    font-weight:600;
+  }
+</style>
+</head>
+<body>
+<div class="shell">
+
+  <div class="topbar">
+    <div class="topbar-left">
+      <img class="logo-img" src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/4gHYSUNDX1BST0ZJTEUAAQEAAAHIAAAAAAQwAABtbnRyUkdCIFhZWiAH4AABAAEAAAAAAABhY3NwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA9tYAAQAAAADTLQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAlkZXNjAAAA8AAAACRyWFlaAAABFAAAABRnWFlaAAABKAAAABRiWFlaAAABPAAAABR3dHB0AAABUAAAABRyVFJDAAABZAAAAChnVFJDAAABZAAAAChiVFJDAAABZAAAAChjcHJ0AAABjAAAADxtbHVjAAAAAAAAAAEAAAAMZW5VUwAAAAgAAAAcAHMAUgBHAEJYWVogAAAAAAAAb6IAADj1AAADkFhZWiAAAAAAAABimQAAt4UAABjaWFlaIAAAAAAAACSgAAAPhAAAts9YWVogAAAAAAAA9tYAAQAAAADTLXBhcmEAAAAAAAQAAAACZmYAAPKnAAANWQAAE9AAAApbAAAAAAAAAABtbHVjAAAAAAAAAAEAAAAMZW5VUwAAACAAAAAcAEcAbwBvAGcAbABlACAASQBuAGMALgAgADIAMAAxADb/2wBDAAUDBAQEAwUEBAQFBQUGBwwIBwcHBw8LCwkMEQ8SEhEPERETFhwXExQaFRERGCEYGh0dHx8fExciJCIeJBweHx7/2wBDAQUFBQcGBw4ICA4eFBEUHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh4eHh7/wAARCAC8ARkDASIAAhEBAxEB/8QAHQABAAEEAwEAAAAAAAAAAAAAAAgBBgcJAgQFA//EAEwQAAEDAwICBAcJDAkFAAAAAAABAgMEBREGBxIhMUFRYQgTIkJxdLEJFBU3gZGhssEWFxgyMzZWYnKS0eEjJCdVgpSV0/A0UmR18f/EABsBAQACAwEBAAAAAAAAAAAAAAAEBQEDBgIH/8QAJhEBAAICAgIBBAIDAAAAAAAAAAECAwQFERIhBhMUMUEigTJR0f/aAAwDAQACEQMRAD8AmWAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAFHKjUyuSpwVMrnsA5IqKmeYynPuNd+7mv9d0O5moKSi1pqSmp4q17Y4obpMxjEz0IiOwnyGYvAc1PqbUOo9Sx33UV2ujIqOFYm1lZJMjHcbsqnGqgSuRUzjrOnc7pb7bTuqK6rip4mpze9cIcLtWQW63T1c70bHC1Xu9BGbW2p63U10fPUSYpmuVIIulGp2+ks+M4y+9fqPUJWvrTmlnZdz9Doqp8OIqp04ppV9jTsW7cPRtfUNgpr5Esj18lHxvjz8rmoRhTK4RyOVyJ3qqFfOTzufV/z2YOkn4tg6mIyT5f1/xPnjaderJiRyxyMR7Ho5qplFTrPpyyYS2W1pUrVM09c5kma7/ppHOyv7Jmpi5TPdzOS3dS+pl+ndWZsM4rdS5cimU7/mUxn4Td3udi2dvFztFdUUNZFwcE0L1Y9uV6lQg4u7G5avyuuL8rl/8ALVSK0tl/Enf8yjiTsd8ymtBN2Ny85+7i/Z9aUffY3K6fu5v2fW1DPTZfxJ3/ADKVRUXoNZ67r7ldP3cX7PrSkzPA/vt51FtE243y41Nxq1uE8az1D+N6tThwmQMygAMAAAAAAAAAAAAAAAAAAAAAAAABResqU61A1l70/GvqX195nD3Pv859Vepw/XcYP3q+NfUvr7/aZw9z8/OfVXqcP13B6SF3zqZafRMzY3cKTyticvYikdvNReTXck5+b/8ACTu6NpfedIVtJE3ik4OJiL2oRke3geqSt4XIuHNzjH/FO4+M3rOC9P2ueO6mkpF7faUs1Jpmkf71ilkmibI+SRqOcqu5/aY43v07Q2W60dVb2NhSsa5JI29GUxhfpO5tnuQtqofgy9K58UTMwyp0/s4+0tDXOpqrVF59+zorII8sgj6eFM/y+k06Gnu05CbWn+KPOS+LL3b8PL07US0l7o6iLKPjma5PoJaUy8ULVXpwRh26s8161bR0zGq6ON6Syr1Naikno28LUaickTBD+U5KW2Iiv5atzLXJPpinwuPiKvn+D2mvZU5YyiZXn2mwnwt/iHvuexn1jXuvJUT0/YcxCEk7t94LFFqnRNo1E7WdRSOuFKyoWFKBHpHxebnxiZ+Y978Dmh/T2q/01P8AdM47CL/YzpP/ANZF7C+MmTtFZfA6oP09qv8ATU/3TN+ym30W2mjE03Fc3XJqVMk/j3Q+LXyscscTujHaXz1hOkMdqgAAAAAAAAAAAAAAAAAAAAAAAAAAU61KlOtQNZe9Pxr6l9ff7TOHufn5z6q9Sg+u4wdvT8a2pfX3+0zj7n5+c+qvUoPruD0mBJjrxgwjvLouChdJfqCRkcT3f08DlwiqvW0zZLIxipxPa1VdhMrjKmD98Yb4l3SaqVXWxUxFw/itXschb8HfJXajxt0j59+2jX6lY7YqevS1UwifIp97a19XWw0TZGsfK9I2OeuE5959G2+qrHubRU75nonFwMTOE619B473qjVw5EyuMpyVP5n0zyrlpatJ9rLDuYuRxecJV7faSodM2trYMSVMqZml63d3oLndK1rkarkRerPWYM2q3RSnp/gfUL3PbG3ME69OE81TydZa4uV6vLKikmkp4IHcULGL1p1r2nzq/DbebYtW8f2ouS5GmlHtenhar/YPfMqnmfWNfDk5OxzXox28iaG9Gs4tSbBXyjnwyviYxXtVcI7yun+RC1UarUROSr1ry7ymz4bYLeNkvV2K7OOMlfwmxtTv9ttp/biwWW43Opjq6OiZFMxIMojkT0lz/hL7U/3vU/5f+ZADDnc+ByovPPAv8CqN7WO/cU1JHTYDF4SW1c0jIo7tUq97ka1PELzVeSdfaZgjVHNRydCpk1T2lqrdKRURVVJ2Ljgd/wByd3pNq9PjxEeHcScKc+0PL6AAAAAAAAAAAAAAAAAAAAAAAAsvcrcvSu3z6FNTVclMlcr0gVjOLKt4c+36C16DwiNra6tgo4L1N42d6MZxQKiZVcJzLY8OLStRets4L9SQ+OmsdSk72omV8U7DXL8iohB+KV8EzJY3t42P4mPToRyYwvzgbYWuRURUXOegorueOWVI97MeElpO7WClt2rKxtqu1PGkckkjV8VLjzkXHLljlz5na3b8JDRdisNTBpi4NvN2lY5kKwfk4nL5yuVOrsQCIu8r2SbqalexyOb8ISpn0Lgzj7n8jk1JqqThXh95Qoi/43EZq6qnra2asqFdJUTPdLIuOly81JneArpee16GuWoaqJ0a3SpxBxJhVjYmM/vIoel1b/XyrpK+3UVJM+FWKtRxNXC8Scj0tDasoNZ2l1hvbW+/lj4VzySVO1v6xb3hEUcjbzRVnNGPjWPi6s5LA0vc1s2oKK58PEkEmcdy9Pzodjq8bj2ePi9P84WH2dM+D3CRekdH2vTkD46VqyOkyj3yc3K3K+T6DFu9+3sVIyTUVoVkTVd/WKfOMqvLib/AyPFuLpVbYlUtzjR2PyfnIvZgwxuDrCs1VcVy5YqGNcQwovT+s7vIfEYd77rzjuP99qquOdWs1pHS06OlZAxUcvG5fxl7zuU8a1NRFA17GLK9GNc93CifKcIIKmd6xwQTTOY3PCxvE7hT7EQte5VzqmfyHq1jVwznzRe07zqc82rWfbm8+hfay+WRlze/SdHpzwfL3I1GSVMzGeMkVOnyuhCEvlc0Ry88tz3EmNXbgVl12Zu+krm2WolVjfesqc1XDugjQqK1VyjuSu6T5jymns6+afrOh1cWPDTwo2ObGWSzT7QaWnltNDJJJbo3Oc+nYqquO3Bei6esP9zW3/Kx/wAC29hEX7zOk88l+DIvYXvgrG7t5iWCyoqcNntyJ6qz+B6bUwmM5KgAAAAAAAAAAAAAAAAAAAAAAAADq3Cjgr6OooquJs1NUMWOVjkyjmqmFQgf4QWxN70Fc6i66fpam5ace7ja+JiufSovmvTr/aTq6ifR8ZY0flFxhUwvJOYZhqg4FVVVMIiZxlFRE9HUHORMK5yNToarsKq+hOfsNkWo9ldsNQzvqLto62yzvdxPlhR8DnL6Y3NU46c2T2v09UpU2vSFC2dq5a+dz53J8sjnKGe4Q+2F2Qvu4N0hrLpTSUGm438U1RI1Wunwv4rE5LjljP0E9rNbKO0WqmtlvhbFS00SRRMTqROXznajhZFG2ONrWMamEaiYRE7MH1RAwtvXmnINR2OWikRGyonFFIqZ4HEbtQ2O42KsdR18LoXIuGPVPIcncpLRWqp0bnaLfc4Vhr6SGpjXzZGI5C34vl8mjPX5hL1tucPpEfLk5plOrlz5/Jk9Gx2m43mtbRWyllnlcv4yJ5LP2ndRIX72ujvfCzfBEecYxxuRvzIpcNqs1utcKQ2+jgpo06o2I0us/wAoiadY6+3rPsUyfpbu3uiqLTNu8prZa2Vv9NIvPH6qdiGMd89rFb47UenIOXN9TSxp09rmp9hn9rVTrOLmI7KORFRUwvec9rcrsa+x9eJ9/tAmsICSuTmxV4nZ8pHLhc95ZOrrAiNfX0TG8vykaOybCqzbvRlXM+Wo07b3veuXO8VzVTqptboL9GaFe7hXC/SdFv8AyTX3cPhfH7aa4rVnuJfPYPlszpJOtLXDn90vk6lpt9Ha7fBb6CBlPSwMRkUTEwjW9h2zjZ679N8AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAP/9k=" alt="J&amp;F">
+      <div class="topbar-divider"></div>
+      <div class="topbar-meta">
+        <small>HR · Internal Tool</small>
+        <strong>Performance Review</strong>
+      </div>
+    </div>
+    <div class="topbar-right">
+      <span><span class="dot"></span>Session active</span>
+      <span>REF · PE-MO-<span id="formRef">0000</span></span>
+    </div>
+  </div>
+
+  <div class="hero">
+    <div>
+      <div class="eyebrow">Monthly Cycle</div>
+      <h1>Employee <em>Evaluation</em></h1>
+      <div class="hero-sub">
+        <b>Confidential</b> · Fill based on real data only · Estimated time <b>12 minutes</b>. Tap any card below to expand it. Fields are optional — fill what you can verify, skip what you can't.
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div class="hero-stats-row">
+        <span class="hero-stats-label">Sections</span>
+        <span class="hero-stats-val"><span id="sectionsFilled">0</span><span class="small">/ 8</span></span>
+      </div>
+      <div class="hero-stats-row">
+        <span class="hero-stats-label">Fields filled</span>
+        <span class="hero-stats-val"><span id="fieldsFilled">0</span><span class="small">/ 31</span></span>
+      </div>
+      <div class="stat-bar"><div class="stat-bar-fill" id="statBarFill"></div></div>
+    </div>
+  </div>
+
+  <div class="filter-strip">
+    <button class="chip active" data-filter="all">All sections <span class="chip-count">8</span></button>
+    <button class="chip" data-filter="metrics">Quantitative <span class="chip-count">5</span></button>
+    <button class="chip" data-filter="ratings">Ratings <span class="chip-count">2</span></button>
+    <button class="chip" data-filter="summary">Summary <span class="chip-count">1</span></button>
+    <button class="chip" data-action="expand-all" style="margin-left:auto">⊕ Expand all</button>
+    <button class="chip" data-action="collapse-all">⊖ Collapse all</button>
+  </div>
+
+  <div class="grid" id="grid">
+
+    <div class="card" data-id="A" data-cat="metrics">
+      <div class="card-head" data-toggle>
+        <div class="card-tag">A</div>
+        <div class="card-title-block">
+          <div class="card-title">Employee Information</div>
+          <div class="card-sub">Identification &amp; evaluation period</div>
+        </div>
+        <div class="card-progress">
+          <span><span class="filled-count">0</span>/6</span>
+          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="card-body"><div class="card-body-inner">
+        <div class="note">Fill all fields accurately. This identifies the evaluation record.</div>
+        <div class="fields">
+          <div><label class="field-label">Employee full name</label><div class="field-desc">First and last name of the employee being evaluated.</div><input class="input" type="text" placeholder="e.g. Arjun Ramesh"></div>
+          <div><label class="field-label">Role / Job title</label><div class="field-desc">Official job title — e.g. Design Engineer, QC Lead.</div><input class="input" type="text" placeholder="e.g. Design Engineer"></div>
+          <div><label class="field-label">Department / Team</label><div class="field-desc">Which team does this employee belong to?</div><input class="input" type="text" placeholder="e.g. MEP Drafting"></div>
+          <div><label class="field-label">Reporting manager</label><div class="field-desc">Name of the manager this employee directly reports to.</div><input class="input" type="text" placeholder="e.g. Priya Nair"></div>
+          <div><label class="field-label">Evaluation month / year</label><div class="field-desc">e.g. June 2025 — just the month, not a date range.</div><input class="input" type="text" placeholder="e.g. June 2025"></div>
+          <div><label class="field-label">Who is filling this form?</label><div class="field-desc">Select the role of the person completing this.</div><select class="select"><option value="">Select an option…</option><option>Employee (self-evaluation)</option><option>Direct Appraiser / Line Manager</option><option>Project Manager</option></select></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="card" data-id="B" data-cat="metrics">
+      <div class="card-head" data-toggle>
+        <div class="card-tag">B</div>
+        <div class="card-title-block">
+          <div class="card-title">Productivity <span class="weight-pill">15%</span></div>
+          <div class="card-sub">Drawings, hours, output volume</div>
+        </div>
+        <div class="card-progress">
+          <span><span class="filled-count">0</span>/5</span>
+          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="card-body"><div class="card-body-inner">
+        <div class="note">Fill the numbers below from the employee's actual timesheet and project records. <b>Do not estimate</b> — use real data only.</div>
+        <div class="fields">
+          <div><label class="field-label">Drawings completed</label><div class="field-desc">Only fully completed and submitted drawings. No WIP.</div><input class="input" type="number" min="0" placeholder="0"></div>
+          <div><label class="field-label">Agreed drawings target</label><div class="field-desc">Target set at the beginning of the month — not adjusted later.</div><input class="input" type="number" min="0" placeholder="0"></div>
+          <div><label class="field-label">Average hours per drawing</label><div class="field-desc">Total hours ÷ drawings completed. Round to 1 decimal.</div><input class="input" type="number" min="0" step="0.1" placeholder="0.0"></div>
+          <div><label class="field-label">Standard budgeted hours</label><div class="field-desc">Company benchmark for this role.</div><input class="input" type="number" min="0" step="0.1" placeholder="0.0"></div>
+          <div class="full"><label class="field-label">Total hours logged this month</label><div class="field-desc">From timesheet or project tracking system.</div><input class="input" type="number" min="0" step="0.1" placeholder="0.0"></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="card" data-id="C" data-cat="metrics">
+      <div class="card-head" data-toggle>
+        <div class="card-tag">C</div>
+        <div class="card-title-block">
+          <div class="card-title">Quality <span class="weight-pill">10%</span></div>
+          <div class="card-sub">Approval rate, rework, error rate</div>
+        </div>
+        <div class="card-progress">
+          <span><span class="filled-count">0</span>/3</span>
+          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="card-body"><div class="card-body-inner">
+        <div class="note">Only count internal errors caused by the employee. <b>Do NOT include</b> client-requested revisions or scope changes.</div>
+        <div class="fields">
+          <div><label class="field-label">First-time approval rate (%)</label><div class="field-desc">Drawings approved on first submission. Target: 95+.</div><input class="input" type="number" min="0" max="100" step="0.1" placeholder="0–100"></div>
+          <div><label class="field-label">Drawings reworked (own errors)</label><div class="field-desc">Enter 0 if no rework. Client revisions don't count.</div><input class="input" type="number" min="0" placeholder="0"></div>
+          <div class="full"><label class="field-label">Error rate this month (%)</label><div class="field-desc">(Errors ÷ total drawings) × 100. Target: 2% or below.</div><input class="input" type="number" min="0" max="100" step="0.01" placeholder="0.00"></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="card" data-id="D" data-cat="metrics">
+      <div class="card-head" data-toggle>
+        <div class="card-tag">D</div>
+        <div class="card-title-block">
+          <div class="card-title">Time Management <span class="weight-pill">10%</span></div>
+          <div class="card-sub">On-time delivery &amp; delay tracking</div>
+        </div>
+        <div class="card-progress">
+          <span><span class="filled-count">0</span>/2</span>
+          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="card-body"><div class="card-body-inner">
+        <div class="note">Only count delays caused by the employee — not delays from waiting on others or external factors.</div>
+        <div class="fields">
+          <div><label class="field-label">On-time delivery rate (%)</label><div class="field-desc">Target: 100. Example: 18/20 on time → enter 90.</div><input class="input" type="number" min="0" max="100" step="0.1" placeholder="0–100"></div>
+          <div><label class="field-label">Average delay (hours)</label><div class="field-desc">Enter 0 if nothing was late. Only delays the employee caused.</div><input class="input" type="number" min="0" step="0.1" placeholder="0.0"></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="card" data-id="E" data-cat="ratings">
+      <div class="card-head" data-toggle>
+        <div class="card-tag">E</div>
+        <div class="card-title-block">
+          <div class="card-title">Behavioral Assessment <span class="weight-pill">20%</span></div>
+          <div class="card-sub">6 traits · rated 1–5</div>
+        </div>
+        <div class="card-progress">
+          <span><span class="filled-count">0</span>/6</span>
+          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="card-body"><div class="card-body-inner">
+        <div class="note"><b>1</b> Poor · <b>2</b> Developing · <b>3</b> Meets Expectations · <b>4</b> Exceeds · <b>5</b> Outstanding. Only give 4 or 5 if you can recall a specific example.</div>
+        <div data-rating-group>
+          <div class="rating-row" data-scale="5"><div class="rating-info"><div class="rating-q">Willingness to learn and grow</div><div class="rating-d">Actively seeks improvement, accepts feedback, applies new knowledge.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
+          <div class="rating-row" data-scale="5"><div class="rating-info"><div class="rating-q">Discipline and work ethics</div><div class="rating-d">Follows processes, meets standards, professional without reminders.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
+          <div class="rating-row" data-scale="5"><div class="rating-info"><div class="rating-q">Communication</div><div class="rating-d">Clear, prompt, flags issues early, contributes positively.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
+          <div class="rating-row" data-scale="5"><div class="rating-info"><div class="rating-q">Initiative and problem-solving</div><div class="rating-d">Proactively identifies problems, suggests solutions, takes action.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
+          <div class="rating-row" data-scale="5"><div class="rating-info"><div class="rating-q">Cooperation and teamwork</div><div class="rating-d">Works well with colleagues, supports teammates, contributes to shared goals.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
+          <div class="rating-row" data-scale="5"><div class="rating-info"><div class="rating-q">Relationship with supervisor</div><div class="rating-d">Engages respectfully, accepts direction, acts on feedback.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="card" data-id="F" data-cat="metrics">
+      <div class="card-head" data-toggle>
+        <div class="card-tag">F</div>
+        <div class="card-title-block">
+          <div class="card-title">Attendance <span class="weight-pill">10%</span></div>
+          <div class="card-sub">Presence, lates, unplanned absences</div>
+        </div>
+        <div class="card-progress">
+          <span><span class="filled-count">0</span>/3</span>
+          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="card-body"><div class="card-body-inner">
+        <div class="note">Approved planned leave (annual, approved sick) does <b>NOT</b> count against attendance. Only unplanned, unnotified absences or late arrivals.</div>
+        <div class="fields">
+          <div><label class="field-label">Attendance rate (%)</label><div class="field-desc">(Days present ÷ total working days) × 100. Target: 100.</div><input class="input" type="number" min="0" max="100" step="0.1" placeholder="0–100"></div>
+          <div><label class="field-label">Times late this month</label><div class="field-desc">15+ minutes past start without prior notice.</div><input class="input" type="number" min="0" placeholder="0"></div>
+          <div class="full"><label class="field-label">Unplanned absences</label><div class="field-desc">No prior notice or approval. Do not include approved leave.</div><input class="input" type="number" min="0" placeholder="0"></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="card" data-id="G" data-cat="ratings">
+      <div class="card-head" data-toggle>
+        <div class="card-tag">G</div>
+        <div class="card-title-block">
+          <div class="card-title">Technical Skills</div>
+          <div class="card-sub">3 traits · rated 1–4</div>
+        </div>
+        <div class="card-progress">
+          <span><span class="filled-count">0</span>/3</span>
+          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="card-body"><div class="card-body-inner">
+        <div class="note"><b>1</b> Needs Improvement · <b>2</b> Meets Expectations · <b>3</b> Exceeds Expectations · <b>4</b> Outstanding.</div>
+        <div data-rating-group>
+          <div class="rating-row" data-scale="4"><div class="rating-info"><div class="rating-q">Proficiency in tools &amp; software</div><div class="rating-d">Revit, AutoCAD, Navisworks — speed, accuracy, independence.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button></div></div>
+          <div class="rating-row" data-scale="4"><div class="rating-info"><div class="rating-q">Accuracy &amp; compliance</div><div class="rating-d">Meets client specs, engineering standards, internal QA.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button></div></div>
+          <div class="rating-row" data-scale="4"><div class="rating-info"><div class="rating-q">Technical problem-solving</div><div class="rating-d">Solves independently vs. always escalating.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button></div></div>
+        </div>
+      </div></div>
+    </div>
+
+    <div class="card" data-id="H" data-cat="summary">
+      <div class="card-head" data-toggle>
+        <div class="card-tag">H</div>
+        <div class="card-title-block">
+          <div class="card-title">Manager's Summary</div>
+          <div class="card-sub">Strengths, focus, recommendation</div>
+        </div>
+        <div class="card-progress">
+          <span><span class="filled-count">0</span>/3</span>
+          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+        </div>
+      </div>
+      <div class="card-body"><div class="card-body-inner">
+        <div class="note">Manager / appraiser only. Be specific. Vague comments like "did well" aren't useful — give <b>concrete examples</b>.</div>
+        <div class="fields">
+          <div class="full"><label class="field-label">Top 2 strengths this month</label><div class="field-desc">e.g. "Delivered drawings ahead of deadline" or "Flagged a design clash before it became an issue."</div><textarea class="textarea" placeholder="1.&#10;2."></textarea></div>
+          <div class="full"><label class="field-label">One focus area for next month</label><div class="field-desc">Choose only one. Be actionable — not "improve quality" but "reduce rework by double-checking specs before submission."</div><textarea class="textarea" placeholder="One specific, actionable focus area…"></textarea></div>
+          <div class="full"><label class="field-label">Overall recommendation</label><div class="field-desc">Select the most appropriate next step.</div><select class="select"><option value="">Select recommendation…</option><option>No action needed — performing well</option><option>Assign a stretch task or growth opportunity</option><option>Put on a structured improvement plan</option><option>Escalate to HR</option><option>Recommend for promotion review</option></select></div>
+        </div>
+      </div></div>
+    </div>
+
+  </div>
+
+  <div class="actions">
+    <div class="actions-info">
+      <span>Auto-saved · <b id="savedTime">just now</b></span>
+      <span>·</span>
+      <span><b id="bottomFilled">0</b> of 31 fields completed</span>
+    </div>
+    <div class="actions-btns">
+      <button class="btn btn-ghost" id="resetBtn">Reset</button>
+      <button class="btn btn-primary" id="submitBtn">Submit evaluation →</button>
+    </div>
+  </div>
+</div>
+
+<div class="thanks-overlay" id="thanksOverlay">
+  <div class="thanks-card">
+    <div class="thanks-mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2>Evaluation <em>submitted</em>.</h2>
+    <p>Your response has been recorded for J&amp;F. Thank you for completing this month's review.</p>
+    <div class="thanks-ref">
+      <span>Ref · <b id="thanksRef">PE-MO-0000</b></span>
+      <span>Status · <span class="thanks-status">Recorded</span></span>
+    </div>
+  </div>
+</div>
+
+<script>
+  const refNum = String(Math.floor(1000 + Math.random()*9000));
+  document.getElementById('formRef').textContent = refNum;
+  document.getElementById('thanksRef').textContent = 'PE-MO-' + refNum;
+
+  document.querySelectorAll('[data-toggle]').forEach(head => {
+    head.addEventListener('click', () => head.closest('.card').classList.toggle('expanded'));
+  });
+
+  const chips = document.querySelectorAll('.chip[data-filter]');
+  chips.forEach(chip => {
+    chip.addEventListener('click', () => {
+      chips.forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      const f = chip.dataset.filter;
+      document.querySelectorAll('.card').forEach(card => {
+        card.style.display = (f === 'all' || card.dataset.cat === f) ? '' : 'none';
+      });
+    });
+  });
+
+  document.querySelector('[data-action="expand-all"]').addEventListener('click', () => {
+    document.querySelectorAll('.card').forEach(c => c.classList.add('expanded'));
+  });
+  document.querySelector('[data-action="collapse-all"]').addEventListener('click', () => {
+    document.querySelectorAll('.card').forEach(c => c.classList.remove('expanded'));
+  });
+
+  document.querySelectorAll('[data-rating-group]').forEach(group => {
+    group.querySelectorAll('.rating-row').forEach(row => {
+      row.querySelectorAll('.rating-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+          row.querySelectorAll('.rating-pill').forEach(p => p.classList.remove('selected'));
+          pill.classList.add('selected');
+          row.dataset.value = pill.dataset.val;
+          updateProgress();
+        });
+      });
+    });
+  });
+
+  function updateProgress(){
+    let totalFilled = 0;
+    let sectionsTouched = 0;
+    document.querySelectorAll('.card').forEach(card => {
+      const inputs = card.querySelectorAll('.input, .select, .textarea');
+      const ratings = card.querySelectorAll('.rating-row');
+      let filled = 0;
+      let total = inputs.length + ratings.length;
+      inputs.forEach(i => { if(i.value.trim() !== '') filled++; });
+      ratings.forEach(r => { if(r.dataset.value) filled++; });
+      const countEl = card.querySelector('.filled-count');
+      const barEl = card.querySelector('.mini-bar-fill');
+      if(countEl) countEl.textContent = filled;
+      if(barEl) barEl.style.width = (total ? (filled/total)*100 : 0) + '%';
+      totalFilled += filled;
+      if(filled > 0) sectionsTouched++;
+    });
+    document.getElementById('fieldsFilled').textContent = totalFilled;
+    document.getElementById('bottomFilled').textContent = totalFilled;
+    document.getElementById('sectionsFilled').textContent = sectionsTouched;
+    document.getElementById('statBarFill').style.width = (totalFilled/31)*100 + '%';
+  }
+
+  document.addEventListener('input', e => { if(e.target.matches('.input, .select, .textarea')) updateProgress(); });
+  document.addEventListener('change', e => { if(e.target.matches('.input, .select, .textarea')) updateProgress(); });
+
+  document.getElementById('resetBtn').addEventListener('click', () => {
+    if(!confirm('Clear all answers and start over?')) return;
+    document.querySelectorAll('.input, .textarea').forEach(i => i.value = '');
+    document.querySelectorAll('.select').forEach(s => s.selectedIndex = 0);
+    document.querySelectorAll('.rating-pill').forEach(p => p.classList.remove('selected'));
+    document.querySelectorAll('.rating-row').forEach(r => delete r.dataset.value);
+    updateProgress();
+  });
+
+  document.getElementById('submitBtn').addEventListener('click', () => {
+    document.getElementById('thanksOverlay').classList.add('show');
+  });
+  document.getElementById('thanksOverlay').addEventListener('click', e => {
+    if(e.target.id === 'thanksOverlay') e.currentTarget.classList.remove('show');
+  });
+
+  updateProgress();
+</script>
+</body>
+</html>
