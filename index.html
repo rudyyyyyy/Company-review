@@ -6,13 +6,8 @@
 <title>J&F · Monthly Performance Review</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=JetBrains+Mono:wght@400;500&family=Inter+Tight:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
-  /* ============ PALETTE — 3 COLORS ONLY ============
-     1. Ink (near-black)     #1a1a2e
-     2. Accent gradient      #8B5CF6 → #3B82F6  (from logo)
-     3. Paper (off-white)    #f6f5f1
-  ===================================================== */
   :root{
     --paper:#f6f5f1;
     --paper-2:#efede6;
@@ -23,7 +18,6 @@
     --ink-3:#8a8aa3;
     --accent-a:#8B5CF6;
     --accent-b:#3B82F6;
-    --accent-soft:rgba(99,102,241,0.10);
     --radius:14px;
   }
   *{box-sizing:border-box;margin:0;padding:0}
@@ -53,7 +47,7 @@
     opacity:0.5;
   }
 
-  .shell{max-width:1280px;margin:0 auto;padding:32px 32px 80px;position:relative;z-index:1}
+  .shell{max-width:1480px;margin:0 auto;padding:24px 24px 60px;position:relative;z-index:1}
 
   /* TOP BAR */
   .topbar{
@@ -63,14 +57,11 @@
     border-radius:12px;
     background:rgba(255,255,255,0.6);
     backdrop-filter:blur(20px);
-    margin-bottom:32px;
+    margin-bottom:24px;
     font-size:12px;
   }
   .topbar-left{display:flex;align-items:center;gap:16px}
-  .logo-img{
-    height:42px;width:auto;
-    display:block;
-  }
+  .logo-img{height:42px;width:auto;display:block}
   .topbar-divider{width:1px;height:28px;background:var(--line-2)}
   .topbar-meta{display:flex;flex-direction:column;line-height:1.2}
   .topbar-meta small{color:var(--ink-3);font-size:10px;letter-spacing:0.16em;text-transform:uppercase;font-weight:500}
@@ -85,67 +76,57 @@
 
   /* HERO */
   .hero{
-    display:grid;grid-template-columns:1fr auto;gap:40px;align-items:end;
-    padding-bottom:32px;margin-bottom:32px;
+    display:flex;justify-content:space-between;align-items:flex-end;gap:40px;
+    padding-bottom:24px;margin-bottom:24px;
     border-bottom:1px solid var(--line);
   }
-  @media (max-width:780px){.hero{grid-template-columns:1fr}}
   .eyebrow{
     display:inline-flex;align-items:center;gap:10px;
     font-size:11px;letter-spacing:0.22em;text-transform:uppercase;
     background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
     -webkit-background-clip:text;background-clip:text;color:transparent;
-    font-weight:600;margin-bottom:18px;
+    font-weight:600;margin-bottom:14px;
   }
-  .eyebrow::before{
-    content:'';width:24px;height:1px;
-    background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
-  }
+  .eyebrow::before{content:'';width:24px;height:1px;background:linear-gradient(90deg,var(--accent-a),var(--accent-b))}
   h1{
     font-family:'Fraunces',serif;font-weight:300;
-    font-size:clamp(40px,5vw,64px);
+    font-size:clamp(32px,4vw,48px);
     line-height:1;letter-spacing:-0.02em;
-    margin-bottom:16px;
-    color:var(--ink);
+    margin-bottom:12px;color:var(--ink);
   }
   h1 em{
     font-style:italic;font-weight:400;
     background:linear-gradient(135deg,var(--accent-a) 0%,var(--accent-b) 100%);
     -webkit-background-clip:text;background-clip:text;color:transparent;
   }
-  .hero-sub{color:var(--ink-2);font-size:14.5px;line-height:1.5;max-width:560px}
+  .hero-sub{color:var(--ink-2);font-size:13.5px;line-height:1.5;max-width:520px}
   .hero-sub b{color:var(--ink);font-weight:600}
 
-  .hero-stats{
-    border:1px solid var(--line);
-    border-radius:var(--radius);
-    padding:20px 24px;
-    background:rgba(255,255,255,0.6);
-    backdrop-filter:blur(20px);
-    min-width:280px;
+  /* MAIN LAYOUT */
+  .workspace{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+  @media (max-width:1100px){.workspace{grid-template-columns:1fr}}
+
+  .form-side{min-width:0}
+  .preview-side{
+    position:sticky;top:24px;
+    max-height:calc(100vh - 48px);
+    overflow-y:auto;
+    min-width:0;
   }
-  .hero-stats-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:10px}
-  .hero-stats-row:last-child{margin-bottom:0}
-  .hero-stats-label{font-size:11px;letter-spacing:0.12em;text-transform:uppercase;color:var(--ink-3);font-weight:500}
-  .hero-stats-val{font-family:'Fraunces',serif;font-size:24px;font-weight:400;color:var(--ink)}
-  .hero-stats-val .small{font-size:14px;color:var(--ink-3);margin-left:6px}
-  .stat-bar{height:3px;background:var(--paper-2);border-radius:99px;overflow:hidden;margin-top:14px}
-  .stat-bar-fill{
-    height:100%;width:0%;
-    background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
-    transition:width 0.6s cubic-bezier(0.65,0,0.35,1);
-    border-radius:99px;
-    box-shadow:0 0 12px rgba(139,92,246,0.3);
+  @media (max-width:1100px){
+    .preview-side{position:static;max-height:none}
   }
+  .preview-side::-webkit-scrollbar{width:6px}
+  .preview-side::-webkit-scrollbar-thumb{background:var(--line-2);border-radius:99px}
 
   /* FILTER STRIP */
-  .filter-strip{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:24px}
+  .filter-strip{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
   .chip{
-    padding:8px 14px;border-radius:99px;border:1px solid var(--line-2);
-    font-size:12px;color:var(--ink-2);cursor:pointer;
+    padding:7px 12px;border-radius:99px;border:1px solid var(--line-2);
+    font-size:11.5px;color:var(--ink-2);cursor:pointer;
     background:rgba(255,255,255,0.5);transition:0.2s;
     font-family:inherit;
-    display:inline-flex;align-items:center;gap:8px;
+    display:inline-flex;align-items:center;gap:6px;
   }
   .chip:hover{border-color:var(--accent-a);color:var(--ink)}
   .chip.active{
@@ -155,122 +136,97 @@
   }
   .chip-count{
     font-family:'JetBrains Mono',monospace;font-size:10px;
-    padding:1px 6px;border-radius:99px;
-    background:rgba(26,26,46,0.06);
+    padding:1px 5px;border-radius:99px;background:rgba(26,26,46,0.06);
   }
   .chip.active .chip-count{background:rgba(255,255,255,0.25);color:#fff}
 
-  /* DASHBOARD GRID */
-  .grid{display:grid;grid-template-columns:repeat(12,1fr);gap:18px}
+  /* CARDS (FORM SIDE) */
+  .cards{display:flex;flex-direction:column;gap:12px}
   .card{
-    grid-column:span 6;
     border:1px solid var(--line);
     border-radius:var(--radius);
     background:rgba(255,255,255,0.7);
     backdrop-filter:blur(20px);
     overflow:hidden;
     transition:0.3s cubic-bezier(0.16,1,0.3,1);
-    position:relative;
   }
-  .card:hover{
-    border-color:var(--line-2);
-    transform:translateY(-2px);
-    box-shadow:0 20px 40px -20px rgba(26,26,46,0.12);
-  }
+  .card:hover{border-color:var(--line-2)}
   .card.expanded{
-    grid-column:span 12;
     border-color:transparent;
     background:#fff;
-    box-shadow:
-      0 0 0 1px rgba(139,92,246,0.25),
-      0 30px 60px -20px rgba(99,102,241,0.18);
-  }
-  .card[data-id="A"]{grid-column:span 4}
-  .card[data-id="H"]{grid-column:span 4}
-  .card[data-id="A"].expanded{grid-column:span 12}
-  .card[data-id="H"].expanded{grid-column:span 12}
-  @media (max-width:980px){
-    .card,.card[data-id="A"],.card[data-id="H"]{grid-column:span 12}
+    box-shadow:0 0 0 1px rgba(139,92,246,0.25), 0 20px 40px -16px rgba(99,102,241,0.18);
   }
 
   .card-head{
-    padding:22px 24px;cursor:pointer;
-    display:grid;grid-template-columns:auto 1fr auto;gap:18px;align-items:center;
+    padding:16px 18px;cursor:pointer;
+    display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;
     user-select:none;
   }
   .card-tag{
-    width:44px;height:44px;border-radius:10px;
+    width:38px;height:38px;border-radius:9px;
     border:1px solid var(--line-2);
     display:grid;place-items:center;
-    font-family:'Fraunces',serif;font-style:italic;font-size:22px;font-weight:400;
-    background:rgba(255,255,255,0.7);
+    font-family:'Fraunces',serif;font-style:italic;font-size:19px;font-weight:400;
     background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
     -webkit-background-clip:text;background-clip:text;color:transparent;
     transition:0.3s;
   }
   .card.expanded .card-tag{
     -webkit-text-fill-color:#fff;color:#fff;
-    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
     -webkit-background-clip:initial;background-clip:initial;
     border-color:transparent;font-style:normal;font-weight:500;
-    box-shadow:0 6px 16px -4px rgba(99,102,241,0.4);
   }
   .card-title-block{min-width:0}
   .card-title{
-    font-family:'Fraunces',serif;font-weight:500;font-size:19px;
+    font-family:'Fraunces',serif;font-weight:500;font-size:16px;
     letter-spacing:-0.01em;line-height:1.2;color:var(--ink);
-    display:flex;align-items:baseline;gap:10px;flex-wrap:wrap;
+    display:flex;align-items:baseline;gap:8px;flex-wrap:wrap;
   }
   .weight-pill{
     font-family:'JetBrains Mono',monospace;
-    font-size:10px;letter-spacing:0.08em;font-weight:500;
+    font-size:9.5px;letter-spacing:0.06em;font-weight:500;
     background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
     -webkit-background-clip:text;background-clip:text;color:transparent;
     border:1px solid var(--accent-a);
-    padding:2px 7px;border-radius:99px;
+    padding:1px 6px;border-radius:99px;
   }
-  .card-sub{font-size:12.5px;color:var(--ink-3);margin-top:4px;line-height:1.4}
+  .card-sub{font-size:11.5px;color:var(--ink-3);margin-top:3px;line-height:1.4}
   .card-progress{
-    display:flex;align-items:center;gap:12px;
-    font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--ink-3);
+    display:flex;align-items:center;gap:10px;
+    font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--ink-3);
   }
-  .mini-bar{width:48px;height:3px;background:var(--paper-2);border-radius:99px;overflow:hidden}
-  .mini-bar-fill{
-    height:100%;width:0%;
-    background:linear-gradient(90deg,var(--accent-a),var(--accent-b));
-    transition:0.4s;border-radius:99px;
-  }
-  .chevron{width:24px;height:24px;display:grid;place-items:center;color:var(--ink-3);transition:0.3s}
+  .mini-bar{width:36px;height:2.5px;background:var(--paper-2);border-radius:99px;overflow:hidden}
+  .mini-bar-fill{height:100%;width:0%;background:linear-gradient(90deg,var(--accent-a),var(--accent-b));transition:0.4s;border-radius:99px}
+  .chevron{width:20px;height:20px;display:grid;place-items:center;color:var(--ink-3);transition:0.3s}
   .card.expanded .chevron{transform:rotate(180deg);color:var(--accent-a)}
 
   .card-body{max-height:0;overflow:hidden;transition:max-height 0.5s cubic-bezier(0.16,1,0.3,1)}
   .card.expanded .card-body{max-height:2000px}
-  .card-body-inner{padding:0 24px 24px;border-top:1px solid var(--line);padding-top:22px}
+  .card-body-inner{padding:0 18px 18px;border-top:1px solid var(--line);padding-top:16px}
   .note{
-    font-size:12.5px;color:var(--ink-2);line-height:1.55;
-    padding:12px 14px;
+    font-size:11.5px;color:var(--ink-2);line-height:1.5;
+    padding:10px 12px;
     background:linear-gradient(90deg,rgba(139,92,246,0.06),rgba(59,130,246,0.04));
-    border-left:2px solid var(--accent-a);
-    border-radius:0 6px 6px 0;
-    margin-bottom:22px;
+    border-left:2px solid var(--accent-a);border-radius:0 6px 6px 0;
+    margin-bottom:16px;
   }
   .note b{color:var(--ink);font-weight:600}
 
-  .fields{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+  .fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
   .fields .full{grid-column:1 / -1}
-  @media (max-width:640px){.fields{grid-template-columns:1fr}}
-  .field-label{display:block;font-size:13px;font-weight:500;color:var(--ink);margin-bottom:5px;line-height:1.4}
-  .field-desc{font-size:11.5px;color:var(--ink-3);line-height:1.5;margin-bottom:9px}
+  @media (max-width:520px){.fields{grid-template-columns:1fr}}
+  .field-label{display:block;font-size:12px;font-weight:500;color:var(--ink);margin-bottom:3px;line-height:1.4}
+  .field-desc{font-size:10.5px;color:var(--ink-3);line-height:1.5;margin-bottom:6px}
   .input,.select,.textarea{
     width:100%;
     background:rgba(255,255,255,0.9);
     border:1px solid var(--line-2);
-    border-radius:8px;
-    padding:11px 13px;
-    color:var(--ink);font-family:inherit;font-size:13.5px;
+    border-radius:7px;
+    padding:9px 11px;
+    color:var(--ink);font-family:inherit;font-size:12.5px;
     transition:0.2s;outline:none;
   }
-  .textarea{min-height:80px;resize:vertical;line-height:1.55}
+  .textarea{min-height:70px;resize:vertical;line-height:1.5}
   .input:focus,.select:focus,.textarea:focus{
     border-color:var(--accent-a);background:#fff;
     box-shadow:0 0 0 3px rgba(139,92,246,0.12);
@@ -279,75 +235,303 @@
   .select{
     appearance:none;-webkit-appearance:none;
     background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'><path fill='%238B5CF6' d='M6 8L0 0h12z'/></svg>");
-    background-repeat:no-repeat;background-position:right 14px center;
-    padding-right:36px;cursor:pointer;
+    background-repeat:no-repeat;background-position:right 12px center;
+    padding-right:32px;cursor:pointer;
   }
   .select option{background:#fff;color:var(--ink)}
 
   .rating-row{
-    display:grid;grid-template-columns:1fr auto;gap:18px;align-items:center;
-    padding:14px 0;border-bottom:1px solid var(--line);
+    display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;
+    padding:11px 0;border-bottom:1px solid var(--line);
   }
   .rating-row:last-child{border-bottom:none}
-  .rating-info{min-width:0}
-  .rating-q{font-size:13.5px;font-weight:500;color:var(--ink);margin-bottom:3px}
-  .rating-d{font-size:11.5px;color:var(--ink-3);line-height:1.4}
-  .rating-pills{display:flex;gap:6px}
+  .rating-q{font-size:12.5px;font-weight:500;color:var(--ink);margin-bottom:2px}
+  .rating-d{font-size:10.5px;color:var(--ink-3);line-height:1.4}
+  .rating-pills{display:flex;gap:4px}
   .rating-pill{
-    width:36px;height:36px;border-radius:8px;
+    width:30px;height:30px;border-radius:6px;
     border:1px solid var(--line-2);background:rgba(255,255,255,0.6);
-    color:var(--ink-2);font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:500;
+    color:var(--ink-2);font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;
     cursor:pointer;transition:0.2s;display:grid;place-items:center;
   }
   .rating-pill:hover{border-color:var(--accent-a);color:var(--ink)}
   .rating-pill.selected{
     background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
     color:#fff;border-color:transparent;
-    box-shadow:0 4px 10px -3px rgba(99,102,241,0.45);
+    box-shadow:0 3px 8px -2px rgba(99,102,241,0.45);
   }
 
+  /* ============ LIVE REPORT (RIGHT SIDE) ============ */
+  .report{
+    background:#fff;
+    border:1px solid var(--line-2);
+    border-radius:6px;
+    box-shadow:0 30px 80px -30px rgba(26,26,46,0.18), 0 8px 20px -8px rgba(26,26,46,0.08);
+    position:relative;
+    overflow:hidden;
+  }
+  .report::before{
+    content:'';position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(180deg, transparent 0 39px, rgba(26,26,46,0.02) 39px 40px);
+  }
+  .report-header{
+    padding:32px 40px 24px;
+    border-bottom:2px solid var(--ink);
+    display:flex;justify-content:space-between;align-items:flex-start;gap:20px;
+    position:relative;
+  }
+  .report-header-left h2{
+    font-family:'Fraunces',serif;font-weight:500;font-size:22px;
+    letter-spacing:-0.01em;color:var(--ink);margin-bottom:4px;line-height:1.15;
+  }
+  .report-header-left .report-sub{
+    font-size:10.5px;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:500;
+  }
+  .report-stamp{
+    text-align:right;font-family:'JetBrains Mono',monospace;font-size:10px;
+    color:var(--ink-3);line-height:1.6;
+  }
+  .report-stamp b{color:var(--ink);font-weight:500}
+  .report-stamp .status-pending{color:var(--ink-3)}
+  .report-stamp .status-active{
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    -webkit-background-clip:text;background-clip:text;color:transparent;font-weight:600;
+  }
+
+  .report-body{padding:24px 40px 36px;position:relative}
+
+  /* Employee header block */
+  .emp-header{
+    display:grid;grid-template-columns:1fr auto;gap:20px;align-items:flex-end;
+    padding-bottom:18px;margin-bottom:22px;
+    border-bottom:1px solid var(--line);
+  }
+  .emp-name{
+    font-family:'Fraunces',serif;font-weight:500;font-size:26px;
+    letter-spacing:-0.015em;color:var(--ink);line-height:1.1;
+    margin-bottom:4px;
+  }
+  .emp-name.empty{color:var(--ink-3);font-style:italic;font-weight:400}
+  .emp-meta{font-size:12px;color:var(--ink-2);line-height:1.5}
+  .emp-meta .pipe{color:var(--ink-3);margin:0 8px}
+  .emp-period{
+    text-align:right;
+  }
+  .emp-period-label{
+    font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:500;margin-bottom:3px;
+  }
+  .emp-period-val{
+    font-family:'Fraunces',serif;font-size:15px;font-weight:500;color:var(--ink);
+  }
+  .emp-period-val.empty{color:var(--ink-3);font-style:italic;font-weight:400}
+
+  /* Section in report */
+  .rsec{margin-bottom:22px}
+  .rsec:last-child{margin-bottom:0}
+  .rsec-head{
+    display:flex;justify-content:space-between;align-items:baseline;
+    margin-bottom:10px;padding-bottom:4px;border-bottom:1px solid var(--line);
+  }
+  .rsec-title{
+    font-family:'Fraunces',serif;font-weight:500;font-size:13px;
+    letter-spacing:0.04em;text-transform:uppercase;color:var(--ink);
+    display:flex;align-items:baseline;gap:8px;
+  }
+  .rsec-title-letter{
+    font-style:italic;font-weight:400;
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    font-size:15px;
+  }
+  .rsec-weight{
+    font-family:'JetBrains Mono',monospace;font-size:9.5px;
+    color:var(--ink-3);letter-spacing:0.04em;
+  }
+
+  /* Data rows */
+  .drow{
+    display:grid;grid-template-columns:1fr auto;gap:14px;align-items:center;
+    padding:5px 0;font-size:12.5px;
+  }
+  .drow-label{color:var(--ink-2)}
+  .drow-val{
+    font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:500;
+    color:var(--ink);text-align:right;
+    padding:2px 8px;border-radius:5px;
+    transition:0.4s;
+  }
+  .drow-val.empty{color:var(--ink-3);font-style:italic;font-weight:400}
+  .drow-val.just-updated{
+    background:linear-gradient(135deg,rgba(139,92,246,0.15),rgba(59,130,246,0.12));
+    color:var(--ink);
+  }
+
+  /* Stat tiles for productivity / quality */
+  .stat-grid{
+    display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;
+    margin-top:4px;
+  }
+  .stat-grid.two{grid-template-columns:1fr 1fr}
+  .stat-tile{
+    padding:10px 12px;border:1px solid var(--line);border-radius:8px;
+    background:linear-gradient(180deg,#fff,#fafaf7);
+    transition:0.3s;
+  }
+  .stat-tile.filled{
+    border-color:rgba(139,92,246,0.25);
+    background:linear-gradient(180deg,rgba(139,92,246,0.04),rgba(59,130,246,0.02));
+  }
+  .stat-tile-label{
+    font-size:9px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:500;margin-bottom:4px;
+  }
+  .stat-tile-val{
+    font-family:'Fraunces',serif;font-size:22px;font-weight:500;
+    color:var(--ink);line-height:1;letter-spacing:-0.01em;
+  }
+  .stat-tile-val.empty{color:var(--ink-3);font-style:italic;font-weight:400;font-size:18px}
+  .stat-tile-val .unit{
+    font-family:'Inter Tight',sans-serif;font-size:11px;color:var(--ink-3);
+    margin-left:2px;font-weight:400;
+  }
+  .stat-tile-extra{
+    font-size:10px;color:var(--ink-3);margin-top:3px;font-family:'JetBrains Mono',monospace;
+  }
+  .stat-tile.filled .stat-tile-extra.good{
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    -webkit-background-clip:text;background-clip:text;color:transparent;
+    font-weight:600;
+  }
+
+  /* Ratings in report */
+  .rate-row{
+    display:grid;grid-template-columns:1fr auto auto;gap:12px;align-items:center;
+    padding:7px 0;font-size:12px;
+    border-bottom:1px dotted var(--line);
+  }
+  .rate-row:last-child{border-bottom:none}
+  .rate-row-label{color:var(--ink-2)}
+  .rate-dots{display:flex;gap:3px}
+  .rate-dot{
+    width:8px;height:8px;border-radius:50%;
+    border:1px solid var(--line-2);background:transparent;
+  }
+  .rate-dot.on{
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
+    border-color:transparent;
+  }
+  .rate-num{
+    font-family:'JetBrains Mono',monospace;font-size:11.5px;font-weight:500;
+    color:var(--ink);width:24px;text-align:right;
+  }
+  .rate-num.empty{color:var(--ink-3);font-style:italic;font-weight:400}
+
+  /* Long text fields */
+  .qbox{
+    margin-top:6px;padding:10px 12px;
+    background:#fafaf7;border:1px dashed var(--line-2);border-radius:6px;
+    font-size:12px;color:var(--ink);line-height:1.5;
+    min-height:36px;white-space:pre-wrap;
+  }
+  .qbox.empty{color:var(--ink-3);font-style:italic;border-style:dashed}
+  .qbox-label{
+    font-size:10px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--ink-3);font-weight:500;margin-bottom:4px;
+  }
+
+  .rec-line{
+    margin-top:6px;padding:10px 14px;
+    border:1px solid var(--accent-a);
+    background:linear-gradient(90deg,rgba(139,92,246,0.06),rgba(59,130,246,0.04));
+    border-radius:7px;
+    font-family:'Fraunces',serif;font-size:14px;font-weight:500;color:var(--ink);
+    line-height:1.3;
+  }
+  .rec-line.empty{
+    border-color:var(--line-2);background:#fafaf7;
+    color:var(--ink-3);font-style:italic;font-weight:400;font-size:12.5px;
+  }
+
+  /* Overall score circle */
+  .score-block{
+    display:grid;grid-template-columns:auto 1fr;gap:18px;align-items:center;
+    padding:14px 16px;margin-top:6px;
+    background:linear-gradient(135deg,rgba(139,92,246,0.05),rgba(59,130,246,0.03));
+    border:1px solid var(--line);border-radius:10px;
+  }
+  .score-ring{
+    width:74px;height:74px;position:relative;
+    display:grid;place-items:center;
+  }
+  .score-ring svg{transform:rotate(-90deg)}
+  .score-num{
+    position:absolute;
+    font-family:'Fraunces',serif;font-size:22px;font-weight:500;color:var(--ink);
+    line-height:1;
+  }
+  .score-num small{font-size:10px;color:var(--ink-3);font-weight:400;margin-left:1px}
+  .score-info-label{
+    font-size:9.5px;letter-spacing:0.14em;text-transform:uppercase;color:var(--ink-3);
+    font-weight:500;margin-bottom:3px;
+  }
+  .score-info-val{
+    font-family:'Fraunces',serif;font-size:16px;font-weight:500;color:var(--ink);
+    margin-bottom:2px;
+  }
+  .score-info-sub{font-size:11px;color:var(--ink-2);line-height:1.4}
+
+  /* Signature block */
+  .sig-block{
+    margin-top:26px;padding-top:18px;border-top:1px dashed var(--line-2);
+    display:grid;grid-template-columns:1fr 1fr;gap:30px;
+  }
+  .sig-line{
+    border-top:1px solid var(--ink);padding-top:6px;
+    font-size:10px;letter-spacing:0.1em;text-transform:uppercase;color:var(--ink-3);
+    font-weight:500;
+  }
+
+  /* ACTIONS */
   .actions{
-    margin-top:36px;
+    margin-top:24px;
     display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;
-    padding:16px 22px;
-    border:1px solid var(--line);
-    border-radius:12px;
+    padding:14px 18px;
+    border:1px solid var(--line);border-radius:12px;
     background:rgba(255,255,255,0.85);
     backdrop-filter:blur(20px);
-    position:sticky;bottom:16px;z-index:20;
+    position:sticky;bottom:12px;z-index:20;
     box-shadow:0 10px 30px -10px rgba(26,26,46,0.08);
   }
-  .actions-info{display:flex;align-items:center;gap:18px;font-size:12.5px;color:var(--ink-2);flex-wrap:wrap}
+  .actions-info{display:flex;align-items:center;gap:14px;font-size:12px;color:var(--ink-2);flex-wrap:wrap}
   .actions-info b{color:var(--ink);font-weight:600;font-family:'JetBrains Mono',monospace}
-  .actions-btns{display:flex;gap:10px}
+  .actions-btns{display:flex;gap:8px}
   .btn{
-    font-family:inherit;font-size:13.5px;font-weight:500;
-    padding:11px 22px;border-radius:8px;border:1px solid transparent;
+    font-family:inherit;font-size:12.5px;font-weight:500;
+    padding:9px 18px;border-radius:8px;border:1px solid transparent;
     cursor:pointer;transition:0.25s;
-    display:inline-flex;align-items:center;gap:8px;
+    display:inline-flex;align-items:center;gap:6px;
   }
   .btn-primary{
-    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
-    color:#fff;
+    background:linear-gradient(135deg,var(--accent-a),var(--accent-b));color:#fff;
     box-shadow:0 6px 18px -6px rgba(99,102,241,0.5);
   }
   .btn-primary:hover{transform:translateY(-1px);box-shadow:0 10px 24px -6px rgba(99,102,241,0.6)}
   .btn-ghost{background:transparent;color:var(--ink-2);border-color:var(--line-2)}
   .btn-ghost:hover{color:var(--ink);border-color:var(--accent-a)}
 
+  /* Thank you overlay */
   .thanks-overlay{
     position:fixed;inset:0;z-index:100;
     background:rgba(246,245,241,0.85);backdrop-filter:blur(20px);
-    display:none;place-items:center;
-    animation:fadeIn 0.4s ease;
-    padding:24px;
+    display:none;place-items:center;animation:fadeIn 0.4s ease;padding:24px;
   }
   .thanks-overlay.show{display:grid}
   @keyframes fadeIn{from{opacity:0}to{opacity:1}}
   .thanks-card{
     text-align:center;max-width:480px;padding:48px 40px;
-    border:1px solid var(--line-2);border-radius:18px;
-    background:#fff;
+    border:1px solid var(--line-2);border-radius:18px;background:#fff;
     box-shadow:0 30px 80px -20px rgba(99,102,241,0.25);
     animation:popIn 0.5s cubic-bezier(0.16,1,0.3,1);
   }
@@ -374,8 +558,7 @@
   .thanks-ref b{color:var(--ink);font-weight:600}
   .thanks-status{
     background:linear-gradient(135deg,var(--accent-a),var(--accent-b));
-    -webkit-background-clip:text;background-clip:text;color:transparent;
-    font-weight:600;
+    -webkit-background-clip:text;background-clip:text;color:transparent;font-weight:600;
   }
 </style>
 </head>
@@ -401,245 +584,435 @@
     <div>
       <div class="eyebrow">Monthly Cycle</div>
       <h1>Employee <em>Evaluation</em></h1>
-      <div class="hero-sub">
-        <b>Confidential</b> · Fill based on real data only · Estimated time <b>12 minutes</b>. Tap any card below to expand it. Fields are optional — fill what you can verify, skip what you can't.
-      </div>
-    </div>
-    <div class="hero-stats">
-      <div class="hero-stats-row">
-        <span class="hero-stats-label">Sections</span>
-        <span class="hero-stats-val"><span id="sectionsFilled">0</span><span class="small">/ 8</span></span>
-      </div>
-      <div class="hero-stats-row">
-        <span class="hero-stats-label">Fields filled</span>
-        <span class="hero-stats-val"><span id="fieldsFilled">0</span><span class="small">/ 31</span></span>
-      </div>
-      <div class="stat-bar"><div class="stat-bar-fill" id="statBarFill"></div></div>
+      <div class="hero-sub"><b>Confidential</b> · Fill on the left, watch the report on the right build live. All fields optional.</div>
     </div>
   </div>
 
-  <div class="filter-strip">
-    <button class="chip active" data-filter="all">All sections <span class="chip-count">8</span></button>
-    <button class="chip" data-filter="metrics">Quantitative <span class="chip-count">5</span></button>
-    <button class="chip" data-filter="ratings">Ratings <span class="chip-count">2</span></button>
-    <button class="chip" data-filter="summary">Summary <span class="chip-count">1</span></button>
-    <button class="chip" data-action="expand-all" style="margin-left:auto">⊕ Expand all</button>
-    <button class="chip" data-action="collapse-all">⊖ Collapse all</button>
-  </div>
+  <!-- ============ WORKSPACE ============ -->
+  <div class="workspace">
 
-  <div class="grid" id="grid">
+    <!-- ============ FORM SIDE (LEFT) ============ -->
+    <div class="form-side">
 
-    <div class="card" data-id="A" data-cat="metrics">
-      <div class="card-head" data-toggle>
-        <div class="card-tag">A</div>
-        <div class="card-title-block">
-          <div class="card-title">Employee Information</div>
-          <div class="card-sub">Identification &amp; evaluation period</div>
-        </div>
-        <div class="card-progress">
-          <span><span class="filled-count">0</span>/6</span>
-          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
-          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
+      <div class="filter-strip">
+        <button class="chip active" data-filter="all">All <span class="chip-count">8</span></button>
+        <button class="chip" data-filter="metrics">Metrics <span class="chip-count">5</span></button>
+        <button class="chip" data-filter="ratings">Ratings <span class="chip-count">2</span></button>
+        <button class="chip" data-filter="summary">Summary <span class="chip-count">1</span></button>
+        <button class="chip" data-action="expand-all" style="margin-left:auto">⊕ Expand all</button>
+        <button class="chip" data-action="collapse-all">⊖ Collapse</button>
       </div>
-      <div class="card-body"><div class="card-body-inner">
-        <div class="note">Fill all fields accurately. This identifies the evaluation record.</div>
-        <div class="fields">
-          <div><label class="field-label">Employee full name</label><div class="field-desc">First and last name of the employee being evaluated.</div><input class="input" type="text" placeholder="e.g. Arjun Ramesh"></div>
-          <div><label class="field-label">Role / Job title</label><div class="field-desc">Official job title — e.g. Design Engineer, QC Lead.</div><input class="input" type="text" placeholder="e.g. Design Engineer"></div>
-          <div><label class="field-label">Department / Team</label><div class="field-desc">Which team does this employee belong to?</div><input class="input" type="text" placeholder="e.g. MEP Drafting"></div>
-          <div><label class="field-label">Reporting manager</label><div class="field-desc">Name of the manager this employee directly reports to.</div><input class="input" type="text" placeholder="e.g. Priya Nair"></div>
-          <div><label class="field-label">Evaluation month / year</label><div class="field-desc">e.g. June 2025 — just the month, not a date range.</div><input class="input" type="text" placeholder="e.g. June 2025"></div>
-          <div><label class="field-label">Who is filling this form?</label><div class="field-desc">Select the role of the person completing this.</div><select class="select"><option value="">Select an option…</option><option>Employee (self-evaluation)</option><option>Direct Appraiser / Line Manager</option><option>Project Manager</option></select></div>
+
+      <div class="cards" id="cards">
+
+        <!-- A -->
+        <div class="card expanded" data-id="A" data-cat="metrics">
+          <div class="card-head" data-toggle>
+            <div class="card-tag">A</div>
+            <div class="card-title-block">
+              <div class="card-title">Employee Information</div>
+              <div class="card-sub">Identification &amp; period</div>
+            </div>
+            <div class="card-progress">
+              <span><span class="filled-count">0</span>/6</span>
+              <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+              <div class="chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-body-inner">
+            <div class="note">Fill all fields accurately. This identifies the evaluation record.</div>
+            <div class="fields">
+              <div><label class="field-label">Employee full name</label><input class="input" type="text" placeholder="e.g. Arjun Ramesh" data-bind="empName"></div>
+              <div><label class="field-label">Role / Job title</label><input class="input" type="text" placeholder="e.g. Design Engineer" data-bind="empRole"></div>
+              <div><label class="field-label">Department / Team</label><input class="input" type="text" placeholder="e.g. MEP Drafting" data-bind="empDept"></div>
+              <div><label class="field-label">Reporting manager</label><input class="input" type="text" placeholder="e.g. Priya Nair" data-bind="empMgr"></div>
+              <div><label class="field-label">Month / year</label><input class="input" type="text" placeholder="e.g. June 2025" data-bind="empMonth"></div>
+              <div><label class="field-label">Filled by</label><select class="select" data-bind="empFiller"><option value="">Select…</option><option>Employee (self-evaluation)</option><option>Direct Appraiser / Line Manager</option><option>Project Manager</option></select></div>
+            </div>
+          </div></div>
         </div>
-      </div></div>
+
+        <!-- B -->
+        <div class="card" data-id="B" data-cat="metrics">
+          <div class="card-head" data-toggle>
+            <div class="card-tag">B</div>
+            <div class="card-title-block">
+              <div class="card-title">Productivity <span class="weight-pill">15%</span></div>
+              <div class="card-sub">Drawings, hours, output</div>
+            </div>
+            <div class="card-progress">
+              <span><span class="filled-count">0</span>/5</span>
+              <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+              <div class="chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-body-inner">
+            <div class="note">Use real timesheet data. <b>Do not estimate.</b></div>
+            <div class="fields">
+              <div><label class="field-label">Drawings completed</label><input class="input" type="number" min="0" placeholder="0" data-bind="prodDone"></div>
+              <div><label class="field-label">Drawings target</label><input class="input" type="number" min="0" placeholder="0" data-bind="prodTarget"></div>
+              <div><label class="field-label">Avg hours per drawing</label><input class="input" type="number" min="0" step="0.1" placeholder="0.0" data-bind="prodAvgHrs"></div>
+              <div><label class="field-label">Standard budgeted hours</label><input class="input" type="number" min="0" step="0.1" placeholder="0.0" data-bind="prodStdHrs"></div>
+              <div class="full"><label class="field-label">Total hours logged</label><input class="input" type="number" min="0" step="0.1" placeholder="0.0" data-bind="prodTotal"></div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- C -->
+        <div class="card" data-id="C" data-cat="metrics">
+          <div class="card-head" data-toggle>
+            <div class="card-tag">C</div>
+            <div class="card-title-block">
+              <div class="card-title">Quality <span class="weight-pill">10%</span></div>
+              <div class="card-sub">Approval rate, rework, errors</div>
+            </div>
+            <div class="card-progress">
+              <span><span class="filled-count">0</span>/3</span>
+              <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+              <div class="chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-body-inner">
+            <div class="note">Only employee-caused errors. <b>Not</b> client revisions.</div>
+            <div class="fields">
+              <div><label class="field-label">First-time approval (%)</label><input class="input" type="number" min="0" max="100" step="0.1" placeholder="0–100" data-bind="qFta"></div>
+              <div><label class="field-label">Drawings reworked</label><input class="input" type="number" min="0" placeholder="0" data-bind="qRework"></div>
+              <div class="full"><label class="field-label">Error rate (%)</label><input class="input" type="number" min="0" max="100" step="0.01" placeholder="0.00" data-bind="qErr"></div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- D -->
+        <div class="card" data-id="D" data-cat="metrics">
+          <div class="card-head" data-toggle>
+            <div class="card-tag">D</div>
+            <div class="card-title-block">
+              <div class="card-title">Time Management <span class="weight-pill">10%</span></div>
+              <div class="card-sub">On-time delivery</div>
+            </div>
+            <div class="card-progress">
+              <span><span class="filled-count">0</span>/2</span>
+              <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+              <div class="chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-body-inner">
+            <div class="note">Only delays caused by the employee.</div>
+            <div class="fields">
+              <div><label class="field-label">On-time rate (%)</label><input class="input" type="number" min="0" max="100" step="0.1" placeholder="0–100" data-bind="tOnTime"></div>
+              <div><label class="field-label">Avg delay (hours)</label><input class="input" type="number" min="0" step="0.1" placeholder="0.0" data-bind="tDelay"></div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- E -->
+        <div class="card" data-id="E" data-cat="ratings">
+          <div class="card-head" data-toggle>
+            <div class="card-tag">E</div>
+            <div class="card-title-block">
+              <div class="card-title">Behavioral <span class="weight-pill">20%</span></div>
+              <div class="card-sub">6 traits · 1–5 scale</div>
+            </div>
+            <div class="card-progress">
+              <span><span class="filled-count">0</span>/6</span>
+              <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+              <div class="chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-body-inner">
+            <div class="note"><b>1</b> Poor · <b>2</b> Developing · <b>3</b> Meets · <b>4</b> Exceeds · <b>5</b> Outstanding</div>
+            <div data-rating-group>
+              <div class="rating-row" data-scale="5" data-bind="bLearn"><div><div class="rating-q">Willingness to learn</div><div class="rating-d">Seeks improvement, accepts feedback.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
+              <div class="rating-row" data-scale="5" data-bind="bDiscipline"><div><div class="rating-q">Discipline &amp; work ethics</div><div class="rating-d">Follows processes, professional.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
+              <div class="rating-row" data-scale="5" data-bind="bComm"><div><div class="rating-q">Communication</div><div class="rating-d">Clear, prompt, flags issues early.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
+              <div class="rating-row" data-scale="5" data-bind="bInit"><div><div class="rating-q">Initiative</div><div class="rating-d">Proactive problem-solving.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
+              <div class="rating-row" data-scale="5" data-bind="bTeam"><div><div class="rating-q">Teamwork</div><div class="rating-d">Supports teammates, shared goals.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
+              <div class="rating-row" data-scale="5" data-bind="bSup"><div><div class="rating-q">Relationship with supervisor</div><div class="rating-d">Respectful, accepts direction.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- F -->
+        <div class="card" data-id="F" data-cat="metrics">
+          <div class="card-head" data-toggle>
+            <div class="card-tag">F</div>
+            <div class="card-title-block">
+              <div class="card-title">Attendance <span class="weight-pill">10%</span></div>
+              <div class="card-sub">Presence, lates, absences</div>
+            </div>
+            <div class="card-progress">
+              <span><span class="filled-count">0</span>/3</span>
+              <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+              <div class="chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-body-inner">
+            <div class="note">Approved leave does <b>NOT</b> count.</div>
+            <div class="fields">
+              <div><label class="field-label">Attendance rate (%)</label><input class="input" type="number" min="0" max="100" step="0.1" placeholder="0–100" data-bind="attRate"></div>
+              <div><label class="field-label">Times late</label><input class="input" type="number" min="0" placeholder="0" data-bind="attLate"></div>
+              <div class="full"><label class="field-label">Unplanned absences</label><input class="input" type="number" min="0" placeholder="0" data-bind="attAbs"></div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- G -->
+        <div class="card" data-id="G" data-cat="ratings">
+          <div class="card-head" data-toggle>
+            <div class="card-tag">G</div>
+            <div class="card-title-block">
+              <div class="card-title">Technical Skills</div>
+              <div class="card-sub">3 traits · 1–4 scale</div>
+            </div>
+            <div class="card-progress">
+              <span><span class="filled-count">0</span>/3</span>
+              <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+              <div class="chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-body-inner">
+            <div class="note"><b>1</b> Needs Improvement · <b>2</b> Meets · <b>3</b> Exceeds · <b>4</b> Outstanding</div>
+            <div data-rating-group>
+              <div class="rating-row" data-scale="4" data-bind="tTools"><div><div class="rating-q">Tools &amp; software</div><div class="rating-d">Revit, AutoCAD, Navisworks.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button></div></div>
+              <div class="rating-row" data-scale="4" data-bind="tAcc"><div><div class="rating-q">Accuracy &amp; compliance</div><div class="rating-d">Meets specs without correction.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button></div></div>
+              <div class="rating-row" data-scale="4" data-bind="tProb"><div><div class="rating-q">Problem-solving</div><div class="rating-d">Solves independently.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button></div></div>
+            </div>
+          </div></div>
+        </div>
+
+        <!-- H -->
+        <div class="card" data-id="H" data-cat="summary">
+          <div class="card-head" data-toggle>
+            <div class="card-tag">H</div>
+            <div class="card-title-block">
+              <div class="card-title">Manager's Summary</div>
+              <div class="card-sub">Strengths, focus, recommendation</div>
+            </div>
+            <div class="card-progress">
+              <span><span class="filled-count">0</span>/3</span>
+              <div class="mini-bar"><div class="mini-bar-fill"></div></div>
+              <div class="chevron"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+            </div>
+          </div>
+          <div class="card-body"><div class="card-body-inner">
+            <div class="note">Manager only. <b>Concrete examples</b>.</div>
+            <div class="fields">
+              <div class="full"><label class="field-label">Top 2 strengths</label><textarea class="textarea" placeholder="1.&#10;2." data-bind="mStrength"></textarea></div>
+              <div class="full"><label class="field-label">One focus area</label><textarea class="textarea" placeholder="One specific, actionable focus area…" data-bind="mFocus"></textarea></div>
+              <div class="full"><label class="field-label">Overall recommendation</label><select class="select" data-bind="mRec"><option value="">Select recommendation…</option><option>No action needed — performing well</option><option>Assign a stretch task or growth opportunity</option><option>Put on a structured improvement plan</option><option>Escalate to HR</option><option>Recommend for promotion review</option></select></div>
+            </div>
+          </div></div>
+        </div>
+
+      </div>
     </div>
 
-    <div class="card" data-id="B" data-cat="metrics">
-      <div class="card-head" data-toggle>
-        <div class="card-tag">B</div>
-        <div class="card-title-block">
-          <div class="card-title">Productivity <span class="weight-pill">15%</span></div>
-          <div class="card-sub">Drawings, hours, output volume</div>
+    <!-- ============ LIVE REPORT (RIGHT) ============ -->
+    <div class="preview-side">
+      <div class="report">
+        <div class="report-header">
+          <div class="report-header-left">
+            <h2>Monthly Performance Evaluation</h2>
+            <div class="report-sub">Confidential · Internal HR record</div>
+          </div>
+          <div class="report-stamp">
+            REF · <b>PE-MO-<span id="reportRef">0000</span></b><br>
+            STATUS · <span class="status-pending" id="reportStatus">Draft · 0% complete</span>
+          </div>
         </div>
-        <div class="card-progress">
-          <span><span class="filled-count">0</span>/5</span>
-          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
-          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-      </div>
-      <div class="card-body"><div class="card-body-inner">
-        <div class="note">Fill the numbers below from the employee's actual timesheet and project records. <b>Do not estimate</b> — use real data only.</div>
-        <div class="fields">
-          <div><label class="field-label">Drawings completed</label><div class="field-desc">Only fully completed and submitted drawings. No WIP.</div><input class="input" type="number" min="0" placeholder="0"></div>
-          <div><label class="field-label">Agreed drawings target</label><div class="field-desc">Target set at the beginning of the month — not adjusted later.</div><input class="input" type="number" min="0" placeholder="0"></div>
-          <div><label class="field-label">Average hours per drawing</label><div class="field-desc">Total hours ÷ drawings completed. Round to 1 decimal.</div><input class="input" type="number" min="0" step="0.1" placeholder="0.0"></div>
-          <div><label class="field-label">Standard budgeted hours</label><div class="field-desc">Company benchmark for this role.</div><input class="input" type="number" min="0" step="0.1" placeholder="0.0"></div>
-          <div class="full"><label class="field-label">Total hours logged this month</label><div class="field-desc">From timesheet or project tracking system.</div><input class="input" type="number" min="0" step="0.1" placeholder="0.0"></div>
-        </div>
-      </div></div>
-    </div>
 
-    <div class="card" data-id="C" data-cat="metrics">
-      <div class="card-head" data-toggle>
-        <div class="card-tag">C</div>
-        <div class="card-title-block">
-          <div class="card-title">Quality <span class="weight-pill">10%</span></div>
-          <div class="card-sub">Approval rate, rework, error rate</div>
-        </div>
-        <div class="card-progress">
-          <span><span class="filled-count">0</span>/3</span>
-          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
-          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-      </div>
-      <div class="card-body"><div class="card-body-inner">
-        <div class="note">Only count internal errors caused by the employee. <b>Do NOT include</b> client-requested revisions or scope changes.</div>
-        <div class="fields">
-          <div><label class="field-label">First-time approval rate (%)</label><div class="field-desc">Drawings approved on first submission. Target: 95+.</div><input class="input" type="number" min="0" max="100" step="0.1" placeholder="0–100"></div>
-          <div><label class="field-label">Drawings reworked (own errors)</label><div class="field-desc">Enter 0 if no rework. Client revisions don't count.</div><input class="input" type="number" min="0" placeholder="0"></div>
-          <div class="full"><label class="field-label">Error rate this month (%)</label><div class="field-desc">(Errors ÷ total drawings) × 100. Target: 2% or below.</div><input class="input" type="number" min="0" max="100" step="0.01" placeholder="0.00"></div>
-        </div>
-      </div></div>
-    </div>
+        <div class="report-body">
 
-    <div class="card" data-id="D" data-cat="metrics">
-      <div class="card-head" data-toggle>
-        <div class="card-tag">D</div>
-        <div class="card-title-block">
-          <div class="card-title">Time Management <span class="weight-pill">10%</span></div>
-          <div class="card-sub">On-time delivery &amp; delay tracking</div>
-        </div>
-        <div class="card-progress">
-          <span><span class="filled-count">0</span>/2</span>
-          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
-          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-      </div>
-      <div class="card-body"><div class="card-body-inner">
-        <div class="note">Only count delays caused by the employee — not delays from waiting on others or external factors.</div>
-        <div class="fields">
-          <div><label class="field-label">On-time delivery rate (%)</label><div class="field-desc">Target: 100. Example: 18/20 on time → enter 90.</div><input class="input" type="number" min="0" max="100" step="0.1" placeholder="0–100"></div>
-          <div><label class="field-label">Average delay (hours)</label><div class="field-desc">Enter 0 if nothing was late. Only delays the employee caused.</div><input class="input" type="number" min="0" step="0.1" placeholder="0.0"></div>
-        </div>
-      </div></div>
-    </div>
+          <!-- Employee header -->
+          <div class="emp-header">
+            <div>
+              <div class="emp-name empty" data-out="empName">Employee name pending</div>
+              <div class="emp-meta">
+                <span data-out="empRole" data-empty-text="Role pending">Role pending</span>
+                <span class="pipe">·</span>
+                <span data-out="empDept" data-empty-text="Department">Department</span>
+                <span class="pipe">·</span>
+                Reports to <span data-out="empMgr" data-empty-text="manager">manager</span>
+              </div>
+            </div>
+            <div class="emp-period">
+              <div class="emp-period-label">Period</div>
+              <div class="emp-period-val empty" data-out="empMonth">—</div>
+            </div>
+          </div>
 
-    <div class="card" data-id="E" data-cat="ratings">
-      <div class="card-head" data-toggle>
-        <div class="card-tag">E</div>
-        <div class="card-title-block">
-          <div class="card-title">Behavioral Assessment <span class="weight-pill">20%</span></div>
-          <div class="card-sub">6 traits · rated 1–5</div>
-        </div>
-        <div class="card-progress">
-          <span><span class="filled-count">0</span>/6</span>
-          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
-          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-      </div>
-      <div class="card-body"><div class="card-body-inner">
-        <div class="note"><b>1</b> Poor · <b>2</b> Developing · <b>3</b> Meets Expectations · <b>4</b> Exceeds · <b>5</b> Outstanding. Only give 4 or 5 if you can recall a specific example.</div>
-        <div data-rating-group>
-          <div class="rating-row" data-scale="5"><div class="rating-info"><div class="rating-q">Willingness to learn and grow</div><div class="rating-d">Actively seeks improvement, accepts feedback, applies new knowledge.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
-          <div class="rating-row" data-scale="5"><div class="rating-info"><div class="rating-q">Discipline and work ethics</div><div class="rating-d">Follows processes, meets standards, professional without reminders.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
-          <div class="rating-row" data-scale="5"><div class="rating-info"><div class="rating-q">Communication</div><div class="rating-d">Clear, prompt, flags issues early, contributes positively.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
-          <div class="rating-row" data-scale="5"><div class="rating-info"><div class="rating-q">Initiative and problem-solving</div><div class="rating-d">Proactively identifies problems, suggests solutions, takes action.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
-          <div class="rating-row" data-scale="5"><div class="rating-info"><div class="rating-q">Cooperation and teamwork</div><div class="rating-d">Works well with colleagues, supports teammates, contributes to shared goals.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
-          <div class="rating-row" data-scale="5"><div class="rating-info"><div class="rating-q">Relationship with supervisor</div><div class="rating-d">Engages respectfully, accepts direction, acts on feedback.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button><button class="rating-pill" data-val="5">5</button></div></div>
-        </div>
-      </div></div>
-    </div>
+          <!-- Section B: Productivity -->
+          <div class="rsec">
+            <div class="rsec-head">
+              <div class="rsec-title"><span class="rsec-title-letter">B</span>Productivity</div>
+              <div class="rsec-weight">Weight 15%</div>
+            </div>
+            <div class="stat-grid">
+              <div class="stat-tile" data-tile="prod1">
+                <div class="stat-tile-label">Drawings done</div>
+                <div class="stat-tile-val empty" data-out="prodDone">—</div>
+                <div class="stat-tile-extra" data-out="prodVsTarget">vs target</div>
+              </div>
+              <div class="stat-tile" data-tile="prod2">
+                <div class="stat-tile-label">Avg hrs / drawing</div>
+                <div class="stat-tile-val empty" data-out="prodAvgHrs"><span>—</span></div>
+                <div class="stat-tile-extra" data-out="prodVsStd">vs standard</div>
+              </div>
+              <div class="stat-tile" data-tile="prod3">
+                <div class="stat-tile-label">Total hours</div>
+                <div class="stat-tile-val empty" data-out="prodTotal"><span>—</span></div>
+                <div class="stat-tile-extra">logged this month</div>
+              </div>
+            </div>
+          </div>
 
-    <div class="card" data-id="F" data-cat="metrics">
-      <div class="card-head" data-toggle>
-        <div class="card-tag">F</div>
-        <div class="card-title-block">
-          <div class="card-title">Attendance <span class="weight-pill">10%</span></div>
-          <div class="card-sub">Presence, lates, unplanned absences</div>
-        </div>
-        <div class="card-progress">
-          <span><span class="filled-count">0</span>/3</span>
-          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
-          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-      </div>
-      <div class="card-body"><div class="card-body-inner">
-        <div class="note">Approved planned leave (annual, approved sick) does <b>NOT</b> count against attendance. Only unplanned, unnotified absences or late arrivals.</div>
-        <div class="fields">
-          <div><label class="field-label">Attendance rate (%)</label><div class="field-desc">(Days present ÷ total working days) × 100. Target: 100.</div><input class="input" type="number" min="0" max="100" step="0.1" placeholder="0–100"></div>
-          <div><label class="field-label">Times late this month</label><div class="field-desc">15+ minutes past start without prior notice.</div><input class="input" type="number" min="0" placeholder="0"></div>
-          <div class="full"><label class="field-label">Unplanned absences</label><div class="field-desc">No prior notice or approval. Do not include approved leave.</div><input class="input" type="number" min="0" placeholder="0"></div>
-        </div>
-      </div></div>
-    </div>
+          <!-- Section C: Quality -->
+          <div class="rsec">
+            <div class="rsec-head">
+              <div class="rsec-title"><span class="rsec-title-letter">C</span>Quality</div>
+              <div class="rsec-weight">Weight 10%</div>
+            </div>
+            <div class="stat-grid">
+              <div class="stat-tile" data-tile="q1">
+                <div class="stat-tile-label">First-time approval</div>
+                <div class="stat-tile-val empty" data-out="qFta">—</div>
+                <div class="stat-tile-extra" data-out="qFtaNote">target 95%+</div>
+              </div>
+              <div class="stat-tile" data-tile="q2">
+                <div class="stat-tile-label">Reworks</div>
+                <div class="stat-tile-val empty" data-out="qRework">—</div>
+                <div class="stat-tile-extra">own errors only</div>
+              </div>
+              <div class="stat-tile" data-tile="q3">
+                <div class="stat-tile-label">Error rate</div>
+                <div class="stat-tile-val empty" data-out="qErr">—</div>
+                <div class="stat-tile-extra" data-out="qErrNote">target ≤ 2%</div>
+              </div>
+            </div>
+          </div>
 
-    <div class="card" data-id="G" data-cat="ratings">
-      <div class="card-head" data-toggle>
-        <div class="card-tag">G</div>
-        <div class="card-title-block">
-          <div class="card-title">Technical Skills</div>
-          <div class="card-sub">3 traits · rated 1–4</div>
-        </div>
-        <div class="card-progress">
-          <span><span class="filled-count">0</span>/3</span>
-          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
-          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
-        </div>
-      </div>
-      <div class="card-body"><div class="card-body-inner">
-        <div class="note"><b>1</b> Needs Improvement · <b>2</b> Meets Expectations · <b>3</b> Exceeds Expectations · <b>4</b> Outstanding.</div>
-        <div data-rating-group>
-          <div class="rating-row" data-scale="4"><div class="rating-info"><div class="rating-q">Proficiency in tools &amp; software</div><div class="rating-d">Revit, AutoCAD, Navisworks — speed, accuracy, independence.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button></div></div>
-          <div class="rating-row" data-scale="4"><div class="rating-info"><div class="rating-q">Accuracy &amp; compliance</div><div class="rating-d">Meets client specs, engineering standards, internal QA.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button></div></div>
-          <div class="rating-row" data-scale="4"><div class="rating-info"><div class="rating-q">Technical problem-solving</div><div class="rating-d">Solves independently vs. always escalating.</div></div><div class="rating-pills"><button class="rating-pill" data-val="1">1</button><button class="rating-pill" data-val="2">2</button><button class="rating-pill" data-val="3">3</button><button class="rating-pill" data-val="4">4</button></div></div>
-        </div>
-      </div></div>
-    </div>
+          <!-- Section D: Time Management -->
+          <div class="rsec">
+            <div class="rsec-head">
+              <div class="rsec-title"><span class="rsec-title-letter">D</span>Time Management</div>
+              <div class="rsec-weight">Weight 10%</div>
+            </div>
+            <div class="stat-grid two">
+              <div class="stat-tile" data-tile="t1">
+                <div class="stat-tile-label">On-time rate</div>
+                <div class="stat-tile-val empty" data-out="tOnTime">—</div>
+                <div class="stat-tile-extra">target 100%</div>
+              </div>
+              <div class="stat-tile" data-tile="t2">
+                <div class="stat-tile-label">Avg delay</div>
+                <div class="stat-tile-val empty" data-out="tDelay">—</div>
+                <div class="stat-tile-extra">on late tasks</div>
+              </div>
+            </div>
+          </div>
 
-    <div class="card" data-id="H" data-cat="summary">
-      <div class="card-head" data-toggle>
-        <div class="card-tag">H</div>
-        <div class="card-title-block">
-          <div class="card-title">Manager's Summary</div>
-          <div class="card-sub">Strengths, focus, recommendation</div>
-        </div>
-        <div class="card-progress">
-          <span><span class="filled-count">0</span>/3</span>
-          <div class="mini-bar"><div class="mini-bar-fill"></div></div>
-          <div class="chevron"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><polyline points="6 9 12 15 18 9"/></svg></div>
+          <!-- Section E: Behavioral -->
+          <div class="rsec">
+            <div class="rsec-head">
+              <div class="rsec-title"><span class="rsec-title-letter">E</span>Behavioral Assessment</div>
+              <div class="rsec-weight">Weight 20% · Scale 1–5</div>
+            </div>
+            <div class="rate-row"><div class="rate-row-label">Willingness to learn</div><div class="rate-dots" data-dots="bLearn" data-max="5"></div><div class="rate-num empty" data-out="bLearn">—</div></div>
+            <div class="rate-row"><div class="rate-row-label">Discipline &amp; work ethics</div><div class="rate-dots" data-dots="bDiscipline" data-max="5"></div><div class="rate-num empty" data-out="bDiscipline">—</div></div>
+            <div class="rate-row"><div class="rate-row-label">Communication</div><div class="rate-dots" data-dots="bComm" data-max="5"></div><div class="rate-num empty" data-out="bComm">—</div></div>
+            <div class="rate-row"><div class="rate-row-label">Initiative &amp; problem-solving</div><div class="rate-dots" data-dots="bInit" data-max="5"></div><div class="rate-num empty" data-out="bInit">—</div></div>
+            <div class="rate-row"><div class="rate-row-label">Teamwork</div><div class="rate-dots" data-dots="bTeam" data-max="5"></div><div class="rate-num empty" data-out="bTeam">—</div></div>
+            <div class="rate-row"><div class="rate-row-label">Relationship with supervisor</div><div class="rate-dots" data-dots="bSup" data-max="5"></div><div class="rate-num empty" data-out="bSup">—</div></div>
+          </div>
+
+          <!-- Section F: Attendance -->
+          <div class="rsec">
+            <div class="rsec-head">
+              <div class="rsec-title"><span class="rsec-title-letter">F</span>Attendance</div>
+              <div class="rsec-weight">Weight 10%</div>
+            </div>
+            <div class="drow"><div class="drow-label">Attendance rate</div><div class="drow-val empty" data-out="attRate">—</div></div>
+            <div class="drow"><div class="drow-label">Times late</div><div class="drow-val empty" data-out="attLate">—</div></div>
+            <div class="drow"><div class="drow-label">Unplanned absences</div><div class="drow-val empty" data-out="attAbs">—</div></div>
+          </div>
+
+          <!-- Section G: Technical -->
+          <div class="rsec">
+            <div class="rsec-head">
+              <div class="rsec-title"><span class="rsec-title-letter">G</span>Technical Skills</div>
+              <div class="rsec-weight">Scale 1–4</div>
+            </div>
+            <div class="rate-row"><div class="rate-row-label">Tools &amp; software</div><div class="rate-dots" data-dots="tTools" data-max="4"></div><div class="rate-num empty" data-out="tTools">—</div></div>
+            <div class="rate-row"><div class="rate-row-label">Accuracy &amp; compliance</div><div class="rate-dots" data-dots="tAcc" data-max="4"></div><div class="rate-num empty" data-out="tAcc">—</div></div>
+            <div class="rate-row"><div class="rate-row-label">Technical problem-solving</div><div class="rate-dots" data-dots="tProb" data-max="4"></div><div class="rate-num empty" data-out="tProb">—</div></div>
+          </div>
+
+          <!-- Overall score -->
+          <div class="rsec">
+            <div class="rsec-head">
+              <div class="rsec-title">Overall Composite</div>
+              <div class="rsec-weight">Weighted</div>
+            </div>
+            <div class="score-block">
+              <div class="score-ring">
+                <svg width="74" height="74">
+                  <circle cx="37" cy="37" r="32" stroke="rgba(26,26,46,0.08)" stroke-width="5" fill="none"/>
+                  <circle id="scoreCircle" cx="37" cy="37" r="32" stroke="url(#scoreGrad)" stroke-width="5" fill="none" stroke-linecap="round" stroke-dasharray="201" stroke-dashoffset="201" style="transition:stroke-dashoffset 0.6s cubic-bezier(0.65,0,0.35,1)"/>
+                  <defs><linearGradient id="scoreGrad" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#8B5CF6"/><stop offset="1" stop-color="#3B82F6"/></linearGradient></defs>
+                </svg>
+                <div class="score-num"><span id="scoreVal">0</span><small>/100</small></div>
+              </div>
+              <div>
+                <div class="score-info-label">Composite Performance</div>
+                <div class="score-info-val" id="scoreLabel">Awaiting data</div>
+                <div class="score-info-sub" id="scoreSub">Fill metrics and ratings to compute score</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section H: Summary -->
+          <div class="rsec">
+            <div class="rsec-head">
+              <div class="rsec-title"><span class="rsec-title-letter">H</span>Manager's Summary</div>
+              <div class="rsec-weight">Qualitative</div>
+            </div>
+            <div class="qbox-label">Top Strengths</div>
+            <div class="qbox empty" data-out="mStrength">Strengths to be filled by manager…</div>
+            <div class="qbox-label" style="margin-top:10px">Focus Area for Next Month</div>
+            <div class="qbox empty" data-out="mFocus">Focus area to be filled by manager…</div>
+            <div class="qbox-label" style="margin-top:10px">Recommendation</div>
+            <div class="rec-line empty" data-out="mRec">No recommendation yet</div>
+          </div>
+
+          <!-- Signatures -->
+          <div class="sig-block">
+            <div class="sig-line">Appraiser signature</div>
+            <div class="sig-line">Employee acknowledgement</div>
+          </div>
+
         </div>
       </div>
-      <div class="card-body"><div class="card-body-inner">
-        <div class="note">Manager / appraiser only. Be specific. Vague comments like "did well" aren't useful — give <b>concrete examples</b>.</div>
-        <div class="fields">
-          <div class="full"><label class="field-label">Top 2 strengths this month</label><div class="field-desc">e.g. "Delivered drawings ahead of deadline" or "Flagged a design clash before it became an issue."</div><textarea class="textarea" placeholder="1.&#10;2."></textarea></div>
-          <div class="full"><label class="field-label">One focus area for next month</label><div class="field-desc">Choose only one. Be actionable — not "improve quality" but "reduce rework by double-checking specs before submission."</div><textarea class="textarea" placeholder="One specific, actionable focus area…"></textarea></div>
-          <div class="full"><label class="field-label">Overall recommendation</label><div class="field-desc">Select the most appropriate next step.</div><select class="select"><option value="">Select recommendation…</option><option>No action needed — performing well</option><option>Assign a stretch task or growth opportunity</option><option>Put on a structured improvement plan</option><option>Escalate to HR</option><option>Recommend for promotion review</option></select></div>
-        </div>
-      </div></div>
     </div>
 
   </div>
 
   <div class="actions">
     <div class="actions-info">
-      <span>Auto-saved · <b id="savedTime">just now</b></span>
+      <span><b id="bottomFilled">0</b>/31 fields</span>
       <span>·</span>
-      <span><b id="bottomFilled">0</b> of 31 fields completed</span>
+      <span>Auto-saved · <b>just now</b></span>
     </div>
     <div class="actions-btns">
       <button class="btn btn-ghost" id="resetBtn">Reset</button>
-      <button class="btn btn-primary" id="submitBtn">Submit evaluation →</button>
+      <button class="btn btn-ghost" id="printBtn">Print report</button>
+      <button class="btn btn-primary" id="submitBtn">Submit →</button>
     </div>
   </div>
 </div>
 
 <div class="thanks-overlay" id="thanksOverlay">
   <div class="thanks-card">
-    <div class="thanks-mark">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
-    </div>
+    <div class="thanks-mark"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
     <h2>Evaluation <em>submitted</em>.</h2>
     <p>Your response has been recorded for J&amp;F. Thank you for completing this month's review.</p>
     <div class="thanks-ref">
@@ -650,14 +1023,18 @@
 </div>
 
 <script>
+  // Ref number
   const refNum = String(Math.floor(1000 + Math.random()*9000));
   document.getElementById('formRef').textContent = refNum;
+  document.getElementById('reportRef').textContent = refNum;
   document.getElementById('thanksRef').textContent = 'PE-MO-' + refNum;
 
+  // Expand/collapse
   document.querySelectorAll('[data-toggle]').forEach(head => {
     head.addEventListener('click', () => head.closest('.card').classList.toggle('expanded'));
   });
 
+  // Filter chips
   const chips = document.querySelectorAll('.chip[data-filter]');
   chips.forEach(chip => {
     chip.addEventListener('click', () => {
@@ -677,6 +1054,7 @@
     document.querySelectorAll('.card').forEach(c => c.classList.remove('expanded'));
   });
 
+  // Rating pills
   document.querySelectorAll('[data-rating-group]').forEach(group => {
     group.querySelectorAll('.rating-row').forEach(row => {
       row.querySelectorAll('.rating-pill').forEach(pill => {
@@ -684,20 +1062,344 @@
           row.querySelectorAll('.rating-pill').forEach(p => p.classList.remove('selected'));
           pill.classList.add('selected');
           row.dataset.value = pill.dataset.val;
-          updateProgress();
+          updateReport();
         });
       });
     });
   });
 
-  function updateProgress(){
+  // ============ LIVE REPORT BINDING ============
+  function flash(el){
+    el.classList.add('just-updated');
+    clearTimeout(el._flashTimer);
+    el._flashTimer = setTimeout(() => el.classList.remove('just-updated'), 900);
+  }
+
+  function setOutText(key, val, opts={}){
+    const outs = document.querySelectorAll('[data-out="'+key+'"]');
+    outs.forEach(el => {
+      const isEmpty = val === '' || val === null || val === undefined;
+      if(isEmpty){
+        el.classList.add('empty');
+        const defaultText = el.dataset.emptyText || el.dataset.originalText || el.textContent;
+        if(!el.dataset.originalText) el.dataset.originalText = defaultText;
+        el.textContent = el.dataset.emptyText || el.dataset.originalText || '—';
+      } else {
+        el.classList.remove('empty');
+        el.textContent = val;
+        flash(el);
+      }
+    });
+  }
+
+  function setTile(tileId, filled){
+    const t = document.querySelector('[data-tile="'+tileId+'"]');
+    if(t) t.classList.toggle('filled', filled);
+  }
+
+  function renderDots(key, val, max){
+    const dotsContainer = document.querySelector('[data-dots="'+key+'"]');
+    if(!dotsContainer) return;
+    dotsContainer.innerHTML = '';
+    const v = parseInt(val) || 0;
+    const m = parseInt(max) || 5;
+    for(let i=1; i<=m; i++){
+      const d = document.createElement('div');
+      d.className = 'rate-dot' + (i <= v ? ' on' : '');
+      dotsContainer.appendChild(d);
+    }
+  }
+
+  function getBindings(){
+    const b = {};
+    document.querySelectorAll('[data-bind]').forEach(el => {
+      const key = el.dataset.bind;
+      if(el.classList.contains('rating-row')){
+        b[key] = el.dataset.value || '';
+      } else {
+        b[key] = el.value.trim();
+      }
+    });
+    return b;
+  }
+
+  function updateReport(){
+    const d = getBindings();
+
+    // Employee block
+    if(d.empName){
+      const nameEl = document.querySelector('[data-out="empName"]');
+      nameEl.classList.remove('empty');
+      nameEl.textContent = d.empName;
+      flash(nameEl);
+    } else {
+      const nameEl = document.querySelector('[data-out="empName"]');
+      nameEl.classList.add('empty');
+      nameEl.textContent = 'Employee name pending';
+    }
+
+    // Meta line items
+    ['empRole','empDept','empMgr'].forEach(k => {
+      const el = document.querySelector('[data-out="'+k+'"]');
+      const fallback = {empRole:'Role pending', empDept:'Department', empMgr:'manager'}[k];
+      if(d[k]){
+        el.textContent = d[k];
+        flash(el);
+      } else {
+        el.textContent = fallback;
+      }
+    });
+
+    // Period
+    const periodEl = document.querySelector('[data-out="empMonth"]');
+    if(d.empMonth){
+      periodEl.classList.remove('empty');
+      periodEl.textContent = d.empMonth;
+      flash(periodEl);
+    } else {
+      periodEl.classList.add('empty');
+      periodEl.textContent = '—';
+    }
+
+    // Productivity tile 1
+    if(d.prodDone){
+      const el = document.querySelector('[data-out="prodDone"]');
+      el.classList.remove('empty');
+      el.innerHTML = d.prodDone + '<span class="unit">drawings</span>';
+      flash(el);
+      setTile('prod1', true);
+      const tEl = document.querySelector('[data-out="prodVsTarget"]');
+      if(d.prodTarget){
+        const diff = parseFloat(d.prodDone) - parseFloat(d.prodTarget);
+        const pct = d.prodTarget > 0 ? Math.round((d.prodDone / d.prodTarget) * 100) : 0;
+        tEl.textContent = (diff>=0?'+':'') + diff + ' vs target (' + pct + '%)';
+        tEl.classList.toggle('good', diff >= 0);
+      } else {
+        tEl.textContent = 'target not set';
+        tEl.classList.remove('good');
+      }
+    } else {
+      const el = document.querySelector('[data-out="prodDone"]');
+      el.classList.add('empty');
+      el.textContent = '—';
+      setTile('prod1', false);
+      document.querySelector('[data-out="prodVsTarget"]').textContent = 'vs target';
+    }
+
+    // Productivity tile 2: avg hrs
+    if(d.prodAvgHrs){
+      const el = document.querySelector('[data-out="prodAvgHrs"]');
+      el.classList.remove('empty');
+      el.innerHTML = d.prodAvgHrs + '<span class="unit">hrs</span>';
+      flash(el);
+      setTile('prod2', true);
+      const stdEl = document.querySelector('[data-out="prodVsStd"]');
+      if(d.prodStdHrs){
+        const diff = parseFloat(d.prodAvgHrs) - parseFloat(d.prodStdHrs);
+        stdEl.textContent = (diff<=0?'':'+') + diff.toFixed(1) + ' vs std ' + d.prodStdHrs + 'h';
+        stdEl.classList.toggle('good', diff <= 0);
+      } else {
+        stdEl.textContent = 'standard not set';
+        stdEl.classList.remove('good');
+      }
+    } else {
+      const el = document.querySelector('[data-out="prodAvgHrs"]');
+      el.classList.add('empty');
+      el.textContent = '—';
+      setTile('prod2', false);
+      document.querySelector('[data-out="prodVsStd"]').textContent = 'vs standard';
+    }
+
+    // Productivity tile 3: total hrs
+    if(d.prodTotal){
+      const el = document.querySelector('[data-out="prodTotal"]');
+      el.classList.remove('empty');
+      el.innerHTML = d.prodTotal + '<span class="unit">hrs</span>';
+      flash(el);
+      setTile('prod3', true);
+    } else {
+      const el = document.querySelector('[data-out="prodTotal"]');
+      el.classList.add('empty');
+      el.textContent = '—';
+      setTile('prod3', false);
+    }
+
+    // Quality tiles
+    [['qFta','q1', '%', 95, true],['qRework','q2', '', null, null],['qErr','q3', '%', 2, false]].forEach(([key, tile, unit, target, higherIsBetter]) => {
+      const el = document.querySelector('[data-out="'+key+'"]');
+      if(d[key] !== ''){
+        el.classList.remove('empty');
+        el.innerHTML = d[key] + (unit ? '<span class="unit">'+unit+'</span>' : '');
+        flash(el);
+        setTile(tile, true);
+        if(target !== null){
+          const noteEl = document.querySelector('[data-out="'+key+'Note"]');
+          if(noteEl){
+            const v = parseFloat(d[key]);
+            const meets = higherIsBetter ? v >= target : v <= target;
+            noteEl.textContent = meets ? 'meets target' : 'below target';
+            noteEl.classList.toggle('good', meets);
+          }
+        }
+      } else {
+        el.classList.add('empty');
+        el.textContent = '—';
+        setTile(tile, false);
+        const noteEl = document.querySelector('[data-out="'+key+'Note"]');
+        if(noteEl){
+          noteEl.textContent = key === 'qFta' ? 'target 95%+' : 'target ≤ 2%';
+          noteEl.classList.remove('good');
+        }
+      }
+    });
+
+    // Time mgmt tiles
+    [['tOnTime','t1','%'],['tDelay','t2','hrs']].forEach(([key,tile,unit]) => {
+      const el = document.querySelector('[data-out="'+key+'"]');
+      if(d[key] !== ''){
+        el.classList.remove('empty');
+        el.innerHTML = d[key] + '<span class="unit">'+unit+'</span>';
+        flash(el);
+        setTile(tile, true);
+      } else {
+        el.classList.add('empty');
+        el.textContent = '—';
+        setTile(tile, false);
+      }
+    });
+
+    // Attendance text rows
+    [['attRate','%'],['attLate',' times'],['attAbs','']].forEach(([key,unit]) => {
+      const el = document.querySelector('[data-out="'+key+'"]');
+      if(d[key] !== ''){
+        el.classList.remove('empty');
+        el.textContent = d[key] + unit;
+        flash(el);
+      } else {
+        el.classList.add('empty');
+        el.textContent = '—';
+      }
+    });
+
+    // Behavioral ratings (1-5)
+    ['bLearn','bDiscipline','bComm','bInit','bTeam','bSup'].forEach(key => {
+      const numEl = document.querySelector('[data-out="'+key+'"]');
+      if(d[key]){
+        numEl.classList.remove('empty');
+        numEl.textContent = d[key] + '/5';
+        flash(numEl);
+        renderDots(key, d[key], 5);
+      } else {
+        numEl.classList.add('empty');
+        numEl.textContent = '—';
+        renderDots(key, 0, 5);
+      }
+    });
+
+    // Technical ratings (1-4)
+    ['tTools','tAcc','tProb'].forEach(key => {
+      const numEl = document.querySelector('[data-out="'+key+'"]');
+      if(d[key]){
+        numEl.classList.remove('empty');
+        numEl.textContent = d[key] + '/4';
+        flash(numEl);
+        renderDots(key, d[key], 4);
+      } else {
+        numEl.classList.add('empty');
+        numEl.textContent = '—';
+        renderDots(key, 0, 4);
+      }
+    });
+
+    // Summary blocks
+    ['mStrength','mFocus'].forEach(key => {
+      const el = document.querySelector('[data-out="'+key+'"]');
+      const fallback = key === 'mStrength' ? 'Strengths to be filled by manager…' : 'Focus area to be filled by manager…';
+      if(d[key]){
+        el.classList.remove('empty');
+        el.textContent = d[key];
+        flash(el);
+      } else {
+        el.classList.add('empty');
+        el.textContent = fallback;
+      }
+    });
+
+    // Recommendation
+    const recEl = document.querySelector('[data-out="mRec"]');
+    if(d.mRec){
+      recEl.classList.remove('empty');
+      recEl.textContent = d.mRec;
+      flash(recEl);
+    } else {
+      recEl.classList.add('empty');
+      recEl.textContent = 'No recommendation yet';
+    }
+
+    // Composite score
+    computeScore(d);
+
+    // Card progress + global
+    updateCardProgress();
+  }
+
+  function computeScore(d){
+    // Productivity (15%): drawings done / target × 100, capped at 100
+    let prodScore = null;
+    if(d.prodDone && d.prodTarget && parseFloat(d.prodTarget) > 0){
+      prodScore = Math.min(100, (parseFloat(d.prodDone) / parseFloat(d.prodTarget)) * 100);
+    }
+    // Quality (10%): first-time approval %
+    let qScore = d.qFta ? Math.min(100, parseFloat(d.qFta)) : null;
+    // Time (10%): on-time rate %
+    let tScore = d.tOnTime ? Math.min(100, parseFloat(d.tOnTime)) : null;
+    // Attendance (10%): attendance rate %
+    let aScore = d.attRate ? Math.min(100, parseFloat(d.attRate)) : null;
+    // Behavioral (20%): avg of 6 ratings × 20 (max 5 → 100)
+    const bKeys = ['bLearn','bDiscipline','bComm','bInit','bTeam','bSup'];
+    const bVals = bKeys.map(k => parseFloat(d[k])).filter(v => !isNaN(v));
+    let bScore = bVals.length ? (bVals.reduce((a,b)=>a+b,0) / bVals.length) * 20 : null;
+    // Technical (rest = 25%): avg of 3 ratings × 25 (max 4 → 100)
+    const tKeys = ['tTools','tAcc','tProb'];
+    const tVals = tKeys.map(k => parseFloat(d[k])).filter(v => !isNaN(v));
+    let techScore = tVals.length ? (tVals.reduce((a,b)=>a+b,0) / tVals.length) * 25 : null;
+
+    const weights = {prod:15, q:10, t:10, a:10, b:20, tech:25};
+    const components = {prod:prodScore, q:qScore, t:tScore, a:aScore, b:bScore, tech:techScore};
+
+    let totalW = 0, totalS = 0;
+    for(const [k, w] of Object.entries(weights)){
+      if(components[k] !== null){ totalW += w; totalS += components[k] * w; }
+    }
+    const score = totalW > 0 ? Math.round(totalS / totalW) : 0;
+
+    document.getElementById('scoreVal').textContent = score;
+    const offset = 201 - (201 * score / 100);
+    document.getElementById('scoreCircle').style.strokeDashoffset = offset;
+
+    const labelEl = document.getElementById('scoreLabel');
+    const subEl = document.getElementById('scoreSub');
+    if(totalW === 0){
+      labelEl.textContent = 'Awaiting data';
+      subEl.textContent = 'Fill metrics and ratings to compute score';
+    } else {
+      let band = 'Needs improvement';
+      if(score >= 90) band = 'Outstanding';
+      else if(score >= 75) band = 'Exceeds expectations';
+      else if(score >= 60) band = 'Meets expectations';
+      else if(score >= 45) band = 'Developing';
+      labelEl.textContent = band;
+      subEl.textContent = 'Based on ' + Math.round((totalW/85)*100) + '% of weighted criteria';
+    }
+  }
+
+  function updateCardProgress(){
     let totalFilled = 0;
-    let sectionsTouched = 0;
     document.querySelectorAll('.card').forEach(card => {
       const inputs = card.querySelectorAll('.input, .select, .textarea');
       const ratings = card.querySelectorAll('.rating-row');
       let filled = 0;
-      let total = inputs.length + ratings.length;
+      const total = inputs.length + ratings.length;
       inputs.forEach(i => { if(i.value.trim() !== '') filled++; });
       ratings.forEach(r => { if(r.dataset.value) filled++; });
       const countEl = card.querySelector('.filled-count');
@@ -705,25 +1407,41 @@
       if(countEl) countEl.textContent = filled;
       if(barEl) barEl.style.width = (total ? (filled/total)*100 : 0) + '%';
       totalFilled += filled;
-      if(filled > 0) sectionsTouched++;
     });
-    document.getElementById('fieldsFilled').textContent = totalFilled;
     document.getElementById('bottomFilled').textContent = totalFilled;
-    document.getElementById('sectionsFilled').textContent = sectionsTouched;
-    document.getElementById('statBarFill').style.width = (totalFilled/31)*100 + '%';
+
+    const pct = Math.round((totalFilled / 31) * 100);
+    const statusEl = document.getElementById('reportStatus');
+    if(totalFilled === 0){
+      statusEl.textContent = 'Draft · 0% complete';
+      statusEl.className = 'status-pending';
+    } else if(totalFilled < 31){
+      statusEl.textContent = 'In progress · ' + pct + '% complete';
+      statusEl.className = 'status-active';
+    } else {
+      statusEl.textContent = 'Complete · ready to submit';
+      statusEl.className = 'status-active';
+    }
   }
 
-  document.addEventListener('input', e => { if(e.target.matches('.input, .select, .textarea')) updateProgress(); });
-  document.addEventListener('change', e => { if(e.target.matches('.input, .select, .textarea')) updateProgress(); });
+  document.addEventListener('input', e => {
+    if(e.target.matches('.input, .select, .textarea')) updateReport();
+  });
+  document.addEventListener('change', e => {
+    if(e.target.matches('.input, .select, .textarea')) updateReport();
+  });
 
+  // Reset / submit / print
   document.getElementById('resetBtn').addEventListener('click', () => {
-    if(!confirm('Clear all answers and start over?')) return;
+    if(!confirm('Clear all answers?')) return;
     document.querySelectorAll('.input, .textarea').forEach(i => i.value = '');
     document.querySelectorAll('.select').forEach(s => s.selectedIndex = 0);
     document.querySelectorAll('.rating-pill').forEach(p => p.classList.remove('selected'));
     document.querySelectorAll('.rating-row').forEach(r => delete r.dataset.value);
-    updateProgress();
+    updateReport();
   });
+
+  document.getElementById('printBtn').addEventListener('click', () => window.print());
 
   document.getElementById('submitBtn').addEventListener('click', () => {
     document.getElementById('thanksOverlay').classList.add('show');
@@ -732,7 +1450,8 @@
     if(e.target.id === 'thanksOverlay') e.currentTarget.classList.remove('show');
   });
 
-  updateProgress();
+  // Initial render
+  updateReport();
 </script>
 </body>
 </html>
